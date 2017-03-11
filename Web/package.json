@@ -48,6 +48,7 @@
   },
   "scripts": {
     "postinstall": "app-time setup",
+    "start": "node index.js",
     "start": "app-time start",
     "start:dashboard": "app-time start --dashboard",
     "prebuild": "rimraf build",
