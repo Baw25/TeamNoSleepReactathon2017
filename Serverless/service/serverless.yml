@@ -9,6 +9,28 @@ functions:
   listings:
     handler: handler.listings
     events:
-     - http:
-        method: get
-        path: listings
+      - http:
+          method: get
+          path: listings
+          cors: true
+  reserve:
+    handler: handler.reserve
+    events:
+      - http:
+          method: post
+          path: reserve
+          cors: true
+  provision:
+    handler: handler.provision
+    events: 
+      - http:
+          method: post
+          path: provision
+          cors: true
+  availability:
+    handler: handler.availability
+    events:
+      - http:
+          method: get
+          path: provision
+          cors: true
