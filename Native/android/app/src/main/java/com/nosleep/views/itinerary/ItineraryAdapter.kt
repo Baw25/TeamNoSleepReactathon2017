@@ -1,11 +1,13 @@
 package com.nosleep.views.itinerary
 
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.android.R
+import com.facebook.drawee.view.SimpleDraweeView
 
 typealias ItemClickHandler = (Int, ItineraryItem) -> Unit
 
@@ -18,6 +20,7 @@ class ItineraryAdapter : RecyclerView.Adapter<ItineraryAdapter.Holder>() {
         holder.title.text = item.title
         holder.description.text = item.description
         holder.itemView.tag = position
+        holder.preview.setImageURI(Uri.parse(item.image))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -44,5 +47,6 @@ class ItineraryAdapter : RecyclerView.Adapter<ItineraryAdapter.Holder>() {
     class Holder(view: View) : RecyclerView.ViewHolder(view) {
         val title = view.findViewById(R.id.tv_title) as TextView
         val description = view.findViewById(R.id.tv_description) as TextView
+        val preview = view.findViewById(R.id.iv_preview) as SimpleDraweeView
     }
 }

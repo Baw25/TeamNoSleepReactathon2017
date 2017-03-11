@@ -38,10 +38,10 @@ class android extends Component {
           style={styles.fullpage}
           items={
             [
-              { title: 'Test', description: 'Test description' },
-              { title: 'Test', description: 'Test description' },
-              { title: 'Test', description: 'Test description' },
-              { title: 'Test', description: 'Test description' },
+              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
+              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
+              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
+              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
             ]
           }
           clickHandler={ITEM_CLICK_EVENT}

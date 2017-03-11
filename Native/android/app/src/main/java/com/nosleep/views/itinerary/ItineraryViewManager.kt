@@ -33,7 +33,8 @@ class ItineraryViewManager : SimpleViewManager<RecyclerView>() {
             val map = readableArray.getMap(index)
             val title = map.getString("title")
             val description = map.getString("description")
-            list.add(ItineraryItem(title, description))
+            val image = map.getString("image")
+            list.add(ItineraryItem(title, description, image))
 
             list
         }
