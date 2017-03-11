@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
+  DeviceEventEmitter,
   StyleSheet,
   Text,
   View
@@ -14,7 +15,22 @@ import {
 
 import Itinerary from './itinerary'
 
-export default class android extends Component {
+const ITEM_CLICK_EVENT = 'ITEM_CLICK';
+
+class android extends Component {
+
+  _handleClick(event) {
+    console.log(`${event.title}`)
+  }
+
+  componentWillMount() {
+    const handleClick = (event) => {
+      console.log(event)
+    }
+
+    DeviceEventEmitter.addListener(ITEM_CLICK_EVENT, this._handleClick)
+  }
+
   render() {
     return (
       <View style={styles.fullpage}>
@@ -28,6 +44,7 @@ export default class android extends Component {
               { title: 'Test', description: 'Test description' },
             ]
           }
+          clickHandler={ITEM_CLICK_EVENT}
         />
       </View>
     );
@@ -43,3 +60,5 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('android', () => android);
+
+export default android;

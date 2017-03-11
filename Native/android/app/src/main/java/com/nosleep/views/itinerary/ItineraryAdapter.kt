@@ -7,19 +7,28 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.android.R
 
+typealias ItemClickHandler = (Int, ItineraryItem) -> Unit
+
 class ItineraryAdapter : RecyclerView.Adapter<ItineraryAdapter.Holder>() {
     val items = mutableListOf<ItineraryItem>()
+    var clickHandler: ItemClickHandler? = null
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = items[position]
         holder.title.text = item.title
         holder.description.text = item.description
+        holder.itemView.tag = position
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.itinerary_item, parent, false)
+
+        view.setOnClickListener {
+            val index = view.tag as Int
+            clickHandler?.invoke(index, items[index])
+        }
 
         return Holder(view)
     }
