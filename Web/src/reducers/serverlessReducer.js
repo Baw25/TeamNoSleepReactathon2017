@@ -1,12 +1,12 @@
-function serverless(state = {}, action) {
+function serverlessReducer(state = {}, action) {
   switch(action.type) {
     case 'SL_FETCH_LISTING':
       return {
-        listing:['lol']
+        openTableList:['lol']
       }
     default:
       return state
   }
 }
 
-export default serverless;
+export default serverlessReducer;

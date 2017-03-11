@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import serverless from './serverlessReducer.js';
+import serverlessReducer from './serverlessReducer.js';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
-  serverless
+  userLocation: userReducer,
+  openTableList: serverlessReducer
 });
 
 export default rootReducer;

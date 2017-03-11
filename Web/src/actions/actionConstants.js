@@ -1,0 +1,3 @@
+export const types = {
+  FETCH_OPENTABLE_LIST: 'FETCH_OPENTABLE_LIST'
+}
