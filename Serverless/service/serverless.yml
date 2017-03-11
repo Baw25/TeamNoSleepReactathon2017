@@ -1,0 +1,14 @@
+
+service: service
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  listings:
+    handler: handler.listings
+    events:
+     - http:
+        method: get
+        path: listings
