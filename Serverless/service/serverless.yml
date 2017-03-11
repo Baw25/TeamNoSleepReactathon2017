@@ -32,5 +32,5 @@ functions:
     events:
       - http:
           method: get
-          path: provision
+          path: availability
           cors: true

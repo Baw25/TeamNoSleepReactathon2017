@@ -51,10 +51,10 @@ module.exports.reserve = (event, context, callback) => {
     try {
       vars = JSON.parse(vars);
     } catch (e) {
-      return callback(constructProvisionParameterError());
+      return callback(constructReserveParameterError());
     }
   } else if (vars === undefined || vars === null) {
-    return callback(constructProvisionParameterError());
+    return callback(constructReserveParameterError());
   }
   if(!ensureProps(vars, requiredReserveParams)) {
     return callback(new Error(`Missing Parameters: ${findMissing(vars, requiredReserveParams)}`))
@@ -64,7 +64,8 @@ module.exports.reserve = (event, context, callback) => {
     email_address: event.emailAddress,
     last_name: event.lastName,
     reservation_token: event.reservationToken,
-    restaurant_id: event.restaurantId
+    restaurant_id: event.restaurantId,
+    is_third_party: true
   })
   .then(response => {
     var customResponse = constructResponse(response)
@@ -141,4 +142,4 @@ module.exports.availability = (event, context, callback) => {
   .catch(callback);
 }
 
-module.exports.
+// module.exports.
