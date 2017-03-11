@@ -1,0 +1,64 @@
+{
+  "name": "react-static-boilerplate",
+  "version": "3.1.1",
+  "description": "A boilerplate for building static sites with React and React Router",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iansinnott/react-static-boilerplate"
+  },
+  "bugs": {
+    "url": "https://github.com/iansinnott/react-static-boilerplate/issues"
+  },
+  "author": "Ian Sinnott <ian@iansinnott.com> (http://iansinnott.com)",
+  "license": "MIT",
+  "homepage": "",
+  "engines": {
+    "node": "^6.9.1"
+  },
+  "devDependencies": {
+    "app-time": ">=0.7.0",
+    "babel-eslint": "^7.1.1",
+    "cross-env": "^3.1.3",
+    "eslint": "^3.11.1",
+    "eslint-config-zen": "^2.0.0",
+    "eslint-plugin-flowtype": "^2.29.1",
+    "eslint-plugin-react": "^6.8.0",
+    "rimraf": "^2.5.2"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "font-awesome": "^4.7.0",
+    "history": "^4.5.0",
+    "normalize.css": "^5.0.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^3.0.0"
+  },
+  "apptime": {
+    "vendorLibs": [
+      "core-js",
+      "classnames",
+      "history",
+      "react",
+      "react-dom",
+      "react-router"
+    ]
+  },
+  "scripts": {
+    "postinstall": "app-time setup",
+    "start": "app-time start",
+    "start:dashboard": "app-time start --dashboard",
+    "prebuild": "rimraf build",
+    "build": "app-time build",
+    "build:analyze": "app-time build --analyze",
+    "lint": "eslint client",
+    "conf": "node ./scripts/generate-nginx-conf.js",
+    "test": "echo 'No tests specified.'",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags",
+    "bump:patch": "npm version patch -m \"v%s\"",
+    "bump:minor": "npm version minor -m \"v%s\"",
+    "bump:major": "npm version major -m \"v%s\"",
+    "bump": "npm run bump:patch"
+  }
+}
