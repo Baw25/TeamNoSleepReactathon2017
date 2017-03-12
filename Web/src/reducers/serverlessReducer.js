@@ -54,15 +54,16 @@ const vibes = [
   'romantic'
 ];
 
-// function addDateNightFilters(data) {
-//   data.map((restaurant) => {
-//     restaurant.category: categories[Math.floor(Math.random()*categories.length)];
-//     restaurant.dollar: dollars[Math.floor(Math.random()*dollars.length)];
-//     restaurant.vibe: vibes[Math.floor(Math.random()*vibes.length)];
-//   })
+function addDateNightFilters(data) {
+  console.log(data)
+  data.map((restaurant) => {
+    restaurant.category: categories[Math.floor(Math.random()*categories.length)];
+    restaurant.dollar: dollars[Math.floor(Math.random()*dollars.length)];
+    restaurant.vibe: vibes[Math.floor(Math.random()*vibes.length)];
+  })
 
-//   return data;
-// }
+  return data;
+}
 
 
 
