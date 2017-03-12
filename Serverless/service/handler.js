@@ -68,7 +68,12 @@ module.exports.listings = (event, context, callback) => {
   .then(response => {
     response.data.items = response.data.items.map((item,index) => {
       item.phone_number = fixPhoneNumber(item.phone_number);
-      item.src = imgs[index];
+      if (item.name !== 'Thirsty Bear') {
+        item.src = imgs[index];
+      } else {
+        item.src = "http://openforbusiness.opentable.com/wp-content/uploads/2016/08/EWP2016_ThirstyBear-0366.jpg"
+      }
+      item.points = ~~(Math.random()*10);
       return item;
     });
     var customResponse =  constructResponse(response);
