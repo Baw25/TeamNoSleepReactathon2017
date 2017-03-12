@@ -2,12 +2,16 @@
 import React, { Component } from 'react';
 import DatePicker from'react-datepicker';
 import moment from'moment'
+import Scroll from 'react-scroll';
 import Homepage from '../Homepage';
 import Header from '../Header';
 import Form from '../Form';
 import logo from './logo.svg';
+
 import './style.css';
 import './react-datepicker-cssmodules.css';
+
+const scroll = Scroll.animateScroll
 
 class App extends Component {
   constructor() {
@@ -19,6 +23,7 @@ class App extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.scrollToTop = this.scrollToTop.bind(this);
   }
 
   handleChange(date) {
@@ -28,11 +33,18 @@ class App extends Component {
   }
 
   handleClick() {
-
+    scroll.scrollTo(
+      2000, 
+      {duration: 2000, delay: 0, smooth: true
+    })
   }
 
   componentDidMount() {
     {this.props.fetchOpenTableListing()}
+  }
+
+  scrollToTop() {
+    scroll.scrollToTop();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,10 +60,7 @@ class App extends Component {
           <div className="Search">
             <Header currentLocation="San Francisco" />
             <div className="logo">
-            {console.log(this.props)}
               <img src='/src/assets/logo.png' />
-            }
-            }
             </div>
             <div className="form">
               <div className="select-date">
@@ -67,13 +76,16 @@ class App extends Component {
                     placeholder="Location or Restaurant"
                   />
                 </div>
-                <button className="submit" onClick={this.handleClick}>
-                  Search
-                </button>
+                  <button className="submit" onClick={this.handleClick}>
+                    Search
+                  </button>
               </div>
             </div>
+            <section id="section04" class="demo">
+              <a><span onClick={this.handleClick}></span></a>
+            </section>
           </div>
-          { webpage }
+            { webpage }
       </div>
     );
   }
