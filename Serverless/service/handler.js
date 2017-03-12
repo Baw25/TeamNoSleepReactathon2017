@@ -292,7 +292,7 @@ module.exports.restaurantDetails = (event, context, callback) => {
   .catch(e => callback(e));
 }
 
-var makeMealTypes = (num) => ['Dessert', 'Dinner', 'Coffee', 'Lunch', 'Breakfast'].slice(0, num || 6);
+var makeMealTypes = (num = 6) => ['Dessert', 'Dinner', 'Coffee', 'Lunch', 'Breakfast'].slice(0, num);
 module.exports.fetchRestaurantItinerary = (event, context, callback) => {
   var vars = event || {};
   if (typeof vars === 'string') {

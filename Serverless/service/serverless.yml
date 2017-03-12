@@ -56,7 +56,7 @@ functions:
           path: itinerary
           cors: true
   fetchRestaurantItinerary:
-    handler: handler.fetchRestaurantItinerary
+    handler: handler.itinerary
     events:
       - http:
           method: get
