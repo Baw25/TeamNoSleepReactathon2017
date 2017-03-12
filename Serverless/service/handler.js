@@ -7,10 +7,17 @@ var qs = require('querystring');
 var token;
 var fake = JSON.parse(fs.readFileSync('./fake.json'));
 var gFetch = require('graphql-fetch')('https://www.opentable.com/graphql');
-// var reactDom = require('react-dom');
-// var React = require('react');
-// console.log(reactDom);
-// reactDom.render(React.createElement('div'), {}, console.log);
+var firebase = require('firebase');
+var config = {
+  apiKey: "AIzaSyDtVF-t3CztPSr_Oymp5SlM9vuxtVnEyTk",
+  authDomain: "reactathon-d75ec.firebaseapp.com",
+  databaseURL: "https://reactathon-d75ec.firebaseio.com",
+  storageBucket: "reactathon-d75ec.appspot.com",
+  messagingSenderId: "240328496149"
+};
+var app = firebase.initializeApp(config);
+var striptags = require('striptags');
+var imgs = fs.readFileSync('./images.txt').toString().split('\n');
 try {
   token = JSON.parse(fs.readFileSync('./accessToken.json'));
   axios.defaults.headers.authorization = "Bearer " + token.access_token;
@@ -50,16 +57,20 @@ var fixPhoneNumber = (phony) => {
   while(phony.endsWith('x')) {
     phony = phony.slice(0,-1);
   }
-  return '(' + phony.slice(0,3) + ')-' + phony.slice(3,6) + '-' + phony.slice(6);
+  if (phony.length === 9) {
+    return '(' + phony.slice(0,3) + ')-' + phony.slice(3,6) + '-' + phony.slice(6);
+  } else {
+    return phony[0] + '(' + phony.slice(1,4) + ')-' + phony.slice(4,7) + '-' + phony.slice(7);
+  }
 }
 module.exports.listings = (event, context, callback) => {
   axios.get('https://platform.otqa.com/sync/listings')
   .then(response => {
-    response.data.items = response.data.items.map(item => {
+    response.data.items = response.data.items.map((item,index) => {
       item.phone_number = fixPhoneNumber(item.phone_number);
+      item.src = imgs[index];
       return item;
     });
-    console.log(response.data);
     var customResponse =  constructResponse(response);
     callback(null, customResponse);
   })
@@ -68,12 +79,7 @@ module.exports.listings = (event, context, callback) => {
   });
 };
 
-module.exports.listings(null, null, ()=>{})
-
 var availableIds = [334879, 334882, 334885, 334888, 334891, 334894, 334897, 334900, 334903];
-
-
-
 
 /*
 
@@ -400,3 +406,16 @@ module.exports.fetchRestaurantItinerary = (event, context, callback) => {
     }).catch(callback);
   }
 }
+
+//d69927c7ea5c770fa2ce9a2f1e3589bd896454f7068f689d8e41a25b54fa6042
+var getPictures = (number) => {
+  axios.get('https://unsplash.com/search/photos/restaurant')
+  .then(result => {
+    console.log(result.data);
+  }).catch(e => {
+    console.log(e);
+  })
+}
+
+// getPictures();
+
