@@ -11,6 +11,8 @@ import './react-datepicker-cssmodules.css';
 
 class App extends Component {
   
+
+
   constructor() {
     super();
   
@@ -40,7 +42,7 @@ class App extends Component {
       <div className="App">
           <div className="Search">
             <Header currentLocation="San Francisco" />
-
+            {console.log(this.props)}
             <div className="logo">
               <img src='/src/assets/logo.png' />
             </div>

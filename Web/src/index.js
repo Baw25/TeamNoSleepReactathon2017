@@ -37,6 +37,7 @@ const rootRoute = {
   }]
 }
 
+console.log(reduxApp)
 
 ReactDOM.render(
   <Provider store={store}>
