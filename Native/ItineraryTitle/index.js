@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
   container: {
     flex : 1,
     flexDirection: 'column',
+    justifyContent: 'flex-start',
+    height: 75,
     padding: 5,
   },
   contentContainer: {

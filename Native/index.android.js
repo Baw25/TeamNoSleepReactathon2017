@@ -35,14 +35,22 @@ class android extends Component {
   render() {
     const { items } = this.state;
     return (
-      <ScrollView style={styles.fullpage}>
+      <ScrollView
+        ref={(scrollView) => {this._sv = scrollView}}
+        style={styles.fullpage}
+      >
         {items.map(this._boundItem)}
       </ScrollView>
     );
   }
 
   _renderItem(item, index) {
-    return (<ItineraryItem key={index} {...item} />);
+    return (
+      <ItineraryItem
+        key={index}
+        {...item}
+      />
+    );
   }
 }
 

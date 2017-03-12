@@ -13,18 +13,14 @@ import {
 
 import ItineraryTitle from '../ItineraryTitle';
 
+const contentHeight = 200;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#efefef',
     borderRadius: 5,
     margin: 10,
     paddingBottom: 5,
-  },
-  body: {
-    marginBottom: 5,
-  },
-  image: {
-    height: 200,
   },
   title: {
     color : '#2a2f43',
@@ -40,12 +36,11 @@ class ItineraryItem extends Component {
     super(props);
 
     this.state = {
-      expanded: true,
-      animation: new Animated.Value(),
+      expanded: false,
+      animation: new Animated.Value(0),
     };
 
     this._boundToggle = this._toggleExpanded.bind(this);
-    this._boundExpanded = this._setExpandedHeight.bind(this);
   }
 
   render() {
@@ -70,17 +65,10 @@ class ItineraryItem extends Component {
           />
         </TouchableOpacity>
 
-        <Animated.View
+        <Animated.Image
           style={{ height: animation }}
-          onLayout={this._boundExpanded}
-        >
-          <View style={styles.body}>
-            <Image
-              source={{ uri: img }}
-              style={styles.image}
-            />
-          </View>
-        </Animated.View>
+          source={{ uri: img }}
+        />
       </View>
     );
   }
@@ -89,23 +77,14 @@ class ItineraryItem extends Component {
     const {
       animation,
       expanded,
-      expandedHeight
     } = this.state;
-    const fromValue = expanded ? expandedHeight : 0.0;
-    const toValue = expanded ? 0.0 : expandedHeight;
+
+    const fromValue = expanded ? contentHeight : 0.0;
+    const toValue = expanded ? 0.0 : contentHeight;
 
     this.setState({ expanded : !expanded });
     animation.setValue(fromValue);
     Animated.timing(animation, { toValue: toValue, duration: 100 }).start();
-  }
-
-  _setExpandedHeight(event) {
-    if (this.state.expandedHeight !== undefined) {
-      return;
-    }
-
-    const height = event.nativeEvent.layout.height;
-    this.setState({ expandedHeight: height });
   }
 }
 
