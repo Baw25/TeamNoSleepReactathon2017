@@ -22,7 +22,7 @@ class android extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { items: [] };
+    this.state = { itinerary: { user: 'John Kim', pair: 'Chimi Kim', schedule: [] } };
 
     this._boundItem = this._renderItem.bind(this);
   }
@@ -31,17 +31,21 @@ class android extends Component {
     fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
       .then(response => response.json())
       .then(itinerary => {
-        this.setState({ items: itinerary.schedule });
+        this.setState({ itinerary });
       });
   }
 
   render() {
-    const { items } = this.state;
+    const { user, pair, schedule } = this.state.itinerary;
+    const startTime = schedule.length > 0 ? schedule[0].startTime : 0;
+    const toolbarParam = { user, pair, startTime };
+
     return (
       <View style={styles.page}>
-        <DateNightToolbar />
+        <DateNightToolbar {...toolbarParam} />
         <ScrollView style={styles.scrollview}>
-          {items.map(this._boundItem)}
+          {schedule.map(this._boundItem)}
+          <View style={{ height: 200 }} />
         </ScrollView>
       </View>
     );

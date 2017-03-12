@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import React, {
   Component,
 } from 'react';
@@ -52,18 +54,33 @@ const styles = StyleSheet.create({
   },
 });
 
+const formatName = (name) => {
+  return name.toUpperCase()
+    .split('')
+    .join(' ');
+}
+
 class DateNightToolbar extends Component {
   render() {
+    const {
+      user,
+      pair,
+      startTime,
+    } = this.props;
+
+    const time = new Date(startTime * 1000);
+    const day = moment(time);
+
     return (
       <View style={styles.toolbar}>
         <Text style={styles.title}>S  C  H  E  D  U  L  E</Text>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.description}>J O H N   K I M</Text>
+          <Text style={styles.description}>{formatName(user)}</Text>
           <View style={styles.date}>
-            <Text style={styles.day}>29</Text>
-            <Text style={styles.month}>AUG</Text>
+            <Text style={styles.day}>{day.format('D')}</Text>
+            <Text style={styles.month}>{day.format('MMM').toUpperCase()}</Text>
           </View>
-          <Text style={styles.description}>C H I M I   K I M</Text>
+          <Text style={styles.description}>{formatName(pair)}</Text>
         </View>
       </View>
     );

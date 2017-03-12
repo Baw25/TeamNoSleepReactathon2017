@@ -117,6 +117,14 @@
     -webkit-transform: rotate(-45deg) translate(0, 0);
   }
 }
+
+.filter-by {
+  margin-top: 10%;
+  color: #ffffff;
+  font-size:20px;
+  font-family: 'Snell Roundhand, cursive';
+}
+
 @keyframes sdb04 {
   0% {
     transform: rotate(-45deg) translate(0, 0);
@@ -128,4 +136,5 @@
     transform: rotate(-45deg) translate(0, 0);
   }
 }
+
 
