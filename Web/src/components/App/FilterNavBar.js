@@ -1,22 +1,29 @@
 import React, {Component} from 'react';
-import SearchBar from './SearchBar.js';
+import SearchBars from './SearchBars.js';
 import './style.css';
 
-const names = [
-  'Italian',
-  'Korean', 
-  'Contemporary American',
-  'Californian',
-  'Japanese',
-  'Chinese',
-  'Spanish Tapas',
-  'French',
-  'Mexican',
-  'Mediterranean',
-  'Seafood',
-  'Peruvian',
-  'Moroccan'
-];
+// const foodCategories = [
+//   'Italian',
+//   'Korean', 
+//   'Contemporary American',
+//   'Californian',
+//   'Japanese',
+//   'Chinese',
+//   'Spanish Tapas',
+//   'French',
+//   'Mexican',
+//   'Mediterranean',
+//   'Seafood',
+//   'Peruvian',
+//   'Moroccan'
+// ];
+
+// const emotions = [
+//   'Going somewhere far',
+//   'I want to keep it in my neighborhood',
+//   'Romantic',
+//   'Adventurous'
+// ];
 
 // const travel =- [
 //   'Walking',
@@ -26,6 +33,7 @@ const names = [
 
 
 class FilterNavBar extends Component {
+
   constructor(props) {
     super(props);
   
@@ -62,15 +70,10 @@ class FilterNavBar extends Component {
           <p className='filter-by'>Choose Your Filters:</p>
         </div>
           <div className='food-category-div'>        
-            <SearchBar className='searchbar-food' />
-          </div>
-          <div className='budget-category-div'>        
-            <SearchBar className='searchbar-food' />
+            <SearchBars className='searchbar-food' />
           </div>
         <div className="header-subsection">
           <a className={this.state.highLightedIdx === 1 ? 'highlighted' : '' } onClick={() => this.handleClick(1)}>Italian</a>
-          <a className={this.state.highLightedIdx === 2 ? 'highlighted' : '' } onClick={() => this.handleClick(2)}>Californian</a>
-          <a className={this.state.highLightedIdx === 3 ? 'highlighted' : '' } onClick={() => this.handleClick(3)}>Tapas</a>
         </div>
       </div> 
     );
@@ -78,3 +81,9 @@ class FilterNavBar extends Component {
 }
 
 export default FilterNavBar;
+
+          // <a className={this.state.highLightedIdx === 3 ? 'highlighted' : '' } onClick={() => this.handleClick(3)}>Tapas</a>
+          // <a className={this.state.highLightedIdx === 2 ? 'highlighted' : '' } onClick={() => this.handleClick(2)}>Californian</a>
+          // <div className='budget-category-div'>        
+          //   <SearchBar className='searchbar-food' />
+          // </div>

@@ -18,6 +18,10 @@ const names = [
   'Moroccan'
 ];
 
+// const names = function(){
+//   this.props.grabData(this.props.datatype);
+// }
+
 const escapeRegexCharacters = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const getSuggestions = value => {
@@ -43,7 +47,7 @@ const renderInputComponent = inputProps => (
   </div>
 );
 
-class SearchBar extends Component {
+class SearchBars extends Component {
   constructor() {
     super();
 
@@ -92,4 +96,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default SearchBars;
