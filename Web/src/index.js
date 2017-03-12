@@ -8,7 +8,8 @@ import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import App from './components/App';
 
-import Routes from './routes';
+import Homepage from './components/Homepage';
+
 import rootReducer from './reducers/rootReducer';
 
 import './index.css';
@@ -28,7 +29,10 @@ const rootRoute = {
     path: '/',
     components: reduxApp,
     childRoutes: [
-
+      {
+        path: '/homepage',
+        component: Homepage
+      },
     ]
   }]
 }
