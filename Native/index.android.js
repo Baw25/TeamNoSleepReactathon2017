@@ -20,7 +20,10 @@ class android extends Component {
 
     this.state = {
       items: [
-        { title: 'Hello this is title', url: 'http://placehold.it/300x200' }
+        { title: 'Hello this is title', url: 'http://placehold.it/300x200' },
+        { title: 'Hello this is other', url: 'http://placehold.it/200x100' },
+        { title: 'Bye this', url: 'http://placehold.it/800x120' },
+        { title: 'Bye is this hello', url: 'http://placehold.it/400x400' },
       ]
     };
 

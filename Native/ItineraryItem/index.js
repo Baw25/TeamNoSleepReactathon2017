@@ -11,24 +11,24 @@ import {
   View,
 } from 'react-native';
 
-const padding = 10
-
 const styles = StyleSheet.create({
   container: {
     margin: 10,
     backgroundColor: '#eeeeee',
-    padding: padding,
   },
   body: {
-    marginTop: 10,
+    marginBottom: 10,
   },
   image: {
     height: 200,
   },
   title: {
     color : '#2a2f43',
+  },
+  titleContainer: {
     flex : 1,
-  }
+    padding: 10,
+  },
 });
 
 class ItineraryItem extends Component {
@@ -40,7 +40,7 @@ class ItineraryItem extends Component {
       animation: new Animated.Value(),
     };
 
-    this._boundToggle = this._toggle.bind(this);
+    this._boundToggle = this._toggleExpanded.bind(this);
     this._boundExpanded = this._setExpandedHeight.bind(this);
   }
 
@@ -53,33 +53,34 @@ class ItineraryItem extends Component {
       endTime,
       title,
       startTime,
-      url,
+      img,
     } = this.props;
 
     return (
-      <TouchableWithoutFeedback onPress={this._boundToggle} >
-        <View style={styles.container}>
-            <Text style={styles.title}>
-              {title}
-            </Text>
+      <View style={styles.container}>
 
-          <Animated.View style={{ height: animation }}>
-            <View
-              style={styles.body}
-              onLayout={this._boundExpanded}
-            >
-              <Image
-                source={{ uri: url }}
-                style={styles.image}
-              />
-            </View>
-          </Animated.View>
-        </View>
-      </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={this._boundToggle} >
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{title}</Text>
+          </View>
+        </TouchableWithoutFeedback>
+
+        <Animated.View
+          style={{ height: animation }}
+          onLayout={this._boundExpanded}
+        >
+          <View style={styles.body}>
+            <Image
+              source={{ uri: img }}
+              style={styles.image}
+            />
+          </View>
+        </Animated.View>
+      </View>
     );
   }
 
-  _toggle() {
+  _toggleExpanded() {
     const {
       animation,
       expanded,
@@ -99,7 +100,7 @@ class ItineraryItem extends Component {
     }
 
     const height = event.nativeEvent.layout.height;
-    this.setState({ expandedHeight: height + padding });
+    this.setState({ expandedHeight: height });
   }
 }
 
