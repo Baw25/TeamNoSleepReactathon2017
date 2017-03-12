@@ -1,22 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
+  Image,
   StyleSheet,
   ScrollView,
   Text,
   View,
 } from 'react-native';
 
+import DateNightFooter from './DateNightFooter';
 import DateNightToolbar from './DateNightToolbar';
 import ItineraryItem from './ItineraryItem';
 import ItineraryTitle from './ItineraryTitle';
-
 
 class android extends Component {
   constructor(props) {
@@ -45,8 +40,9 @@ class android extends Component {
         <DateNightToolbar {...toolbarParam} />
         <ScrollView style={styles.scrollview}>
           {schedule.map(this._boundItem)}
-          <View style={{ height: 200 }} />
+          <View style={{ height: 50 }} />
         </ScrollView>
+        <DateNightFooter />
       </View>
     );
   }
@@ -71,7 +67,6 @@ const styles = StyleSheet.create({
   scrollview: {
     backgroundColor: '#dfdfdf',
     flexGrow: 1,
-    flexShrink: 0,
   },
   toolbar: {
     flexGrow: 0,
