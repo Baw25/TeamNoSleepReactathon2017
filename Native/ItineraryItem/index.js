@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import React, {
   Component,
 } from 'react';
@@ -28,6 +30,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 16,
   },
+  time: {
+    color: '#666666',
+    fontSize: 12,
+  },
+  timeContainer: {
+    alignItems: 'flex-end',
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 28,
+    width: 56,
+  },
 });
 
 class ItineraryItem extends Component {
@@ -57,18 +70,20 @@ class ItineraryItem extends Component {
       img,
     } = this.props;
 
-    const sidebarProps = {
-      icon,
-      startTime,
-    };
-
+    const sidebarProps = { icon };
     const titleProps = {
       desc,
       name,
     };
 
+    const time = new Date(startTime * 1000);
+    const timeString = moment(time).format('h:mm A');
+
     return (
       <View style={styles.container}>
+        <View style={styles.timeContainer}>
+          <Text style={styles.time}>{timeString}</Text>
+        </View>
         <ItinerarySidebar {...sidebarProps} />
         <View style={styles.card}>
           <TouchableOpacity onPress={this._boundToggle}>

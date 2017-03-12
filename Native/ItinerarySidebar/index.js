@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     width: 12,
   },
   bar: {
-    backgroundColor: '#aaa',
+    backgroundColor: '#cccccc',
     width: 8,
   },
   bottom: {
@@ -54,13 +54,12 @@ const styles = StyleSheet.create({
   },
   top: {
     height: 36,
-  }
+  },
 });
 
 class ItinerarySidebar extends Component {
   render() {
     const {
-      startTime,
       icon,
     } = this.props;
 
