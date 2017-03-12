@@ -6,6 +6,8 @@ var leftPad = require('left-pad');
 var qs = require('querystring');
 var token;
 var fake = JSON.parse(fs.readFileSync('./fake.json'));
+var gFetch = require('graphql-fetch')('https://www.opentable.com/graphql');
+
 try {
   token = JSON.parse(fs.readFileSync('./accessToken.json'));
   axios.defaults.headers.authorization = "Bearer " + token.access_token;
@@ -254,7 +256,41 @@ module.exports.itinerary = (event, context, callback) => {
 module.exports.lyft = (event, context, callback) => {
   callback(null, {statusCode: 201, body: "LYFT OK "});
 }
-// module.exports.listings({}, null, console.log);
 
+module.exports.restaurantDetails = (event, context, callback) => {
+  var vars = event;
+  if (typeof vars === 'string') {
+    vars = JSON.parse(vars);
+  }
+  if (!vars) {
+    vars = {};
+  }
+  var query = `
+  query {
+    restaurant (restaurantId: ${vars.rid || ~~(Math.random() * 10000)}){
+      name
+      description
+      coordinates {
+        latitude
+        longitude
+      }
+    }
+  }
+  `;
+  gFetch(query, {}, {})
+  .then(result => {
+    callback(null, {statusCode: 200, body: JSON.stringify(result)});
+  })
+  .catch(e => callback(e));
+}
 
+module.exports.fetchRestaurantItinerary = (event, context, callback) => {
+  var itinerary = [];
+
+  var checkComplete = () => {
+    if (itinerary.length > 3) {
+      callback(null, )
+    }
+  }
+}
 

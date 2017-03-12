@@ -48,3 +48,10 @@ functions:
           method: post
           path: lyft
           cors: true
+  restaurantDetails:
+    handler: handler.restaurantDetails
+    events:
+      - http:
+          method: get
+          path: itinerary
+          cors: true
