@@ -1,21 +1,28 @@
 import React,{Component} from 'react';
+import ActualModal from './ActualModal.js';
 
-class Button extends Component {
+class ButtonModal extends Component {
   state = {
     isShowingModal: false
   }
   handleClick = () => this.setState({isShowingModal: true})
   handleClose = () => this.setState({isShowingModal: false})
 
+  testFunction(){
+    console.log("Hey");
+  }
+
   render(){
       return (
-        <a onClick={this.handleClick}>
+        <button onClick={this.handleClick}>
           <span>Button Text</span>
           {
             this.state.isShowingModal &&
-            <ModalComponentHere onClose={this.handleClose}/>
+            <ActualModal onClose={this.handleClose}/>
           }
-        </a>;
+        </button>
     );
   }
 }
+
+export default ButtonModal;

@@ -27,6 +27,7 @@
     "react-scroll": "^1.4.7",
     "react-select": "^1.0.0-rc.3",
     "react-select-popover": "^0.1.1",
+    "react-spinjs": "^3.0.0",
     "react-star-rating-component": "^1.2.4",
     "react-textselect": "^0.2.0",
     "react-toggle-button": "^2.1.0",
