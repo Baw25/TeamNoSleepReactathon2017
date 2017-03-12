@@ -7,46 +7,27 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  DeviceEventEmitter,
+  Image,
   StyleSheet,
+  ScrollView,
   Text,
-  View
 } from 'react-native';
 
-import Itinerary from './itinerary'
-
-const ITEM_CLICK_EVENT = 'ITEM_CLICK';
+import ItineraryItem from './ItineraryItem';
 
 class android extends Component {
 
-  _handleClick(event) {
-    console.log(`${event.title}`)
-  }
-
-  componentWillMount() {
-    const handleClick = (event) => {
-      console.log(event)
-    }
-
-    DeviceEventEmitter.addListener(ITEM_CLICK_EVENT, this._handleClick)
-  }
-
   render() {
     return (
-      <View style={styles.fullpage}>
-        <Itinerary
-          style={styles.fullpage}
-          items={
-            [
-              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
-              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
-              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
-              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
-            ]
-          }
-          clickHandler={ITEM_CLICK_EVENT}
-        />
-      </View>
+      <ScrollView style={styles.fullpage}>
+        <ItineraryItem title="Hi">
+          <Image
+            source={{ uri: 'http://placehold.it/300x200' }}
+            style={styles.image}
+          />
+          <Text>Hello everyone</Text>
+        </ItineraryItem>
+      </ScrollView>
     );
   }
 }
@@ -56,9 +37,13 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 0,
     flexBasis: '100%'
+  },
+  image: {
+    height: 200,
   }
 });
 
 AppRegistry.registerComponent('android', () => android);
+AppRegistry.registerComponent('ItineraryItem', () => ItineraryItem);
 
 export default android;
