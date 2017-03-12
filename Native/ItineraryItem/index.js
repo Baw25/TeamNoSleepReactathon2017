@@ -56,9 +56,11 @@ class ItineraryItem extends Component {
   constructor(props) {
     super(props);
 
+    const { startExpanded } = props;
+
     this.state = {
-      expanded: false,
-      expansion: new Animated.Value(0),
+      expanded: startExpanded,
+      expansion: new Animated.Value(startExpanded ? contentHeight : 0),
     };
 
     this._boundToggle = this._toggleExpanded.bind(this);

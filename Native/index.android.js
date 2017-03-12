@@ -13,6 +13,11 @@ import DateNightToolbar from './DateNightToolbar';
 import ItineraryItem from './ItineraryItem';
 import ItineraryTitle from './ItineraryTitle';
 
+const autoExpandList = [
+  'Dinner',
+  'Movie',
+];
+
 class android extends Component {
   constructor(props) {
     super(props);
@@ -48,9 +53,12 @@ class android extends Component {
   }
 
   _renderItem(item, index, items) {
+    const startExpanded = autoExpandList.includes(item.name);
+
     return (
       <ItineraryItem
         key={index}
+        startExpanded={startExpanded}
         top={index > 0}
         bottom={index < items.length - 1}
         {...item}
