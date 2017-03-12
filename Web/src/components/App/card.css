@@ -148,14 +148,25 @@
 
 .datnights img {
   width: 100px;
-  height: 100px;
+  height: 50px;
 }
 
-.datnights span {
-  flex: display;
-  flex-direction: column;
+.dddd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 10px 0;
 }
 
-.datnights span h4 p {
-  margin: 0 auto;
+.dddd span {
+  
+}
+
+.dddd p {
+  margin: 0;
+  width: 100px;
+}
+
+.dddd h4 {
+  margin: 0;
 }
