@@ -10,6 +10,7 @@ import logo from './logo.svg';
 
 import './style.css';
 import './react-datepicker-cssmodules.css';
+import './imgSrc.css'
 
 const scroll = Scroll.animateScroll
 
@@ -60,12 +61,12 @@ class App extends Component {
           <div className="Search">
             <Header currentLocation="San Francisco" />
             <div className="logo">
-              <img src='/src/assets/logo.png' />
+              <img className="logo" src='../../../src/assets/logo.png' />
             </div>
             <div className="form">
               <div className="select-date">
                 <div className="cal_img">
-                  <img src='/src/assets/cal2.png'/>
+                  <img className="cal2" src='../../../src/assets/cal2.png'/>
                 </div>
                 <DatePicker 
                   selected={this.state.date}
