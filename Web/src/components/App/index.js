@@ -10,9 +10,6 @@ import './style.css';
 import './react-datepicker-cssmodules.css';
 
 class App extends Component {
-  
-
-
   constructor() {
     super();
   
@@ -34,6 +31,14 @@ class App extends Component {
 
   }
 
+  componentDidMount() {
+    {this.props.fetchOpenTableListing()}
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+  }
+
   render() {
     const webpage = this.props.children ? React.cloneElement(this.props.children,
         this.props) : <Homepage {... this.props} />;
@@ -42,9 +47,11 @@ class App extends Component {
       <div className="App">
           <div className="Search">
             <Header currentLocation="San Francisco" />
-            {console.log(this.props)}
             <div className="logo">
+            {console.log(this.props)}
               <img src='/src/assets/logo.png' />
+            }
+            }
             </div>
             <div className="form">
               <div className="select-date">
