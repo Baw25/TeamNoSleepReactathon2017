@@ -10,18 +10,8 @@ import {
 } from 'react-native';
 
 const icons = {
-  bench: require('./bench.png'),
-  calendar: require('./calendar.png'),
   car: require('./car.png'),
-  coffee: require('./coffee.png'),
   dish: require('./dish.png'),
-  fireworks: require('./fireworks.png'),
-  location: require('./location.png'),
-  meat: require('./meat.png'),
-  movie: require('./movie.png'),
-  muffin: require('./muffin.png'),
-  park: require('./park.png'),
-  table: require('./table.png'),
   tickets: require('./tickets.png'),
   walking: require('./walking.png'),
 };
