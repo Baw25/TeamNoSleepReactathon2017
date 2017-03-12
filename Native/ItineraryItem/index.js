@@ -18,9 +18,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#efefef',
     borderRadius: 5,
     margin: 10,
+    paddingBottom: 5,
   },
   body: {
-    marginBottom: 10,
+    marginBottom: 5,
   },
   image: {
     height: 200,

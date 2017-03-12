@@ -12,14 +12,17 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flex : 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     padding: 5,
   },
   contentContainer: {
+    alignItems: 'center',
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
+  },
+  description: {
+    color: '#666666'
   },
   image: {
     backgroundColor: '#999999',
@@ -27,8 +30,14 @@ const styles = StyleSheet.create({
     marginRight: 10,
     width: 40,
   },
+  textContainer: {
+    flex : 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
   time: {
-    color: '#666666',
+    color: '#999999',
+    marginBottom: 5,
   },
   title: {
     color : '#000000',
@@ -47,14 +56,17 @@ class ItineraryTitle extends Component {
     } = this.props;
 
     const date = new Date(time);
-    const dateString = moment(date).format('ddd h:mm a');
+    const dateString = moment(date).format('h:mm A');
 
     return (
       <View style={styles.container}>
-        <View style={styles.image}/>
+        <Text style={styles.time}>{dateString}</Text>
         <View style={styles.contentContainer}>
-          <Text style={styles.time}>{dateString}</Text>
-          <Text style={styles.title}>{title}</Text>
+          <View style={styles.image}/>
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.description}>Julian give me desc</Text>
+          </View>
         </View>
       </View>
     );
