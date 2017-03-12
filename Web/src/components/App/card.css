@@ -142,5 +142,20 @@
 
 .datnights {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+
+.datnights img {
+  width: 100px;
+  height: 100px;
+}
+
+.datnights span {
+  flex: display;
+  flex-direction: column;
+}
+
+.datnights span h4 p {
+  margin: 0 auto;
 }

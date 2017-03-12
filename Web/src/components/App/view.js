@@ -19,10 +19,13 @@ class View extends React.Component {
           <ModalDialog onClose={this.handleClose}>
             <div className="datnights">
               <h1>Date Night is Reserved</h1>
-              <p>{`your date starts at ${this.props.name}`}</p>
+              <p>{`Schedule ${this.props.name}`}</p>
               <ul>
                 {didnothavetimetopassdown.schedule.map((schedule) => {
-                  
+                  return (<div>
+                    <span><h4>{schedule.name}</h4><p>{schedule.desc}</p></span>
+                    <img src={schedule.img}/>
+                  </div>)
                 })}
               </ul>
             </div>
