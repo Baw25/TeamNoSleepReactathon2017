@@ -5,7 +5,7 @@ import MultiSelect from './MultiSelect.js';
 import ToggleButton from 'react-toggle-button'
 import './style.css';
 
-const options = ['Uber', 'Lyft', 'Taxi', 'Walking'];
+const travelTypes = ['Uber', 'Lyft', 'Taxi', 'Walking'];
 
 const dateTypes = [
   "Trending spots only",
@@ -35,27 +35,18 @@ class FilterNavBar extends Component {
       highLightedIdx: 0,
       value: true
     };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleInput = this.handleInput.bind(this);
   }
 
-  handleClick(idx) {
-    console.log(idx);
-    this.setState({highLightedIdx: idx});
-  }
-
-  handleInput(e) {
-    this.setState({
-      currentLocation: e.target.value
-    });
-  }
-
-          // <p className='filter-by'>Choose Your Filters:</p>
   render() {
-    const defaultOption1 = "Transportation";
-    const defaultOption2 = "Your kind of night";
-    const budgetDefault = 'Budget Preference';
+    const {
+      options,
+      vibe,
+      dollars,
+    } = this.props.currentSelections;
+
+    const defaultOption1 = options || "Transportation";
+    const defaultOption2 = vibe || "Your kind of night";
+    const budgetDefault = dollars || 'Budget Preference';
     return (
       <div className="filter-header">
         <div className="header-location-item">
@@ -85,27 +76,32 @@ class FilterNavBar extends Component {
               }} />
         </div>
           <div className='food-category-div'>   
-            <MultiSelect 
-              options={options} 
-              onChange={this._onSelect} 
-              value={defaultOption1} 
+            <MultiSelect
+              selectionType='options'
+              options={travelTypes}
+              onChange={this.props.onSelect}
+              value={defaultOption1}
               placeholder="Select an option" />     
           </div>
           <div className='food-category-div'>   
-            <MultiSelect 
-              options={dateTypes} 
-              onChange={this._onSelect} 
-              value={defaultOption2} 
+            <MultiSelect
+              selectionType='vibe'
+              options={dateTypes}
+              onChange={this.props.onSelect}
+              value={defaultOption2}
               placeholder="Select an option" />     
           </div>
           <div className='food-category-div'>   
-            <SearchBars />     
+            <SearchBars 
+              getQuery={this.props.getQuery}
+            />     
           </div>
           <div className='food-category-div'>   
-            <MultiSelect 
-              options={budgets} 
-              onChange={this._onSelect} 
-              value={budgetDefault} 
+            <MultiSelect
+              selectionType='dollars'
+              options={budgets}
+              onChange={this.props.onSelect}
+              value={budgetDefault}
               placeholder="Select an option" />     
           </div>
       </div> 

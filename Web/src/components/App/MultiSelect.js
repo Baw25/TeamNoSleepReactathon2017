@@ -20,16 +20,6 @@ class Dropdown extends Component {
     this.fireChangeEvent = this.fireChangeEvent.bind(this)
   }
 
-  componentWillReceiveProps (newProps) {
-    if (newProps.value && newProps.value !== this.state.selected) {
-      this.setState({selected: newProps.value})
-    } else if (!newProps.value && newProps.placeholder) {
-      this.setState({selected: { label: newProps.placeholder, value: '' }})
-    } else {
-      this.setState({selected: { label: DEFAULT_PLACEHOLDER_STRING, value: '' }})
-    }
-  }
-
   componentDidMount () {
     document.addEventListener('click', this.handleDocumentClick, false)
     document.addEventListener('touchend', this.handleDocumentClick, false)
@@ -67,7 +57,7 @@ class Dropdown extends Component {
 
   fireChangeEvent (newState) {
     if (newState.selected !== this.state.selected && this.props.onChange) {
-      this.props.onChange(newState.selected)
+      this.props.onChange(newState.selected, this.props.selectionType)
     }
   }
 

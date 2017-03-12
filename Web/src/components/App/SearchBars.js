@@ -90,7 +90,9 @@ class SearchBars extends Component {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
-        renderInputComponent={renderInputComponent} />
+        renderInputComponent={renderInputComponent} 
+        onSuggestionSelected={this.props.getQuery}
+      />
     );
   }
 }

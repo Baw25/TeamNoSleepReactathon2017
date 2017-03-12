@@ -27,6 +27,14 @@ class BottomDetails extends Component {
   }
 
   render(){
+    const {
+      options,
+      vibe,
+      dollars,
+    } = this.props.selections;
+
+    console.log(`opt: ${options}, vibe: ${vibe}, dollars: ${dollars}`)
+
     const { rating } = this.state;
     return (
       <div className="OrderBackground">
