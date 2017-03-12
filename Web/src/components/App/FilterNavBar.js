@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import SearchBars from './SearchBars.js';
 import MultiSelect from './MultiSelect.js';
 // import Dropdown from 'react-dropdown';
+import ToggleButton from 'react-toggle-button'
 import './style.css';
 
 const options = ['Uber', 'Lyft', 'Taxi', 'Walking'];
@@ -32,6 +33,7 @@ class FilterNavBar extends Component {
     this.state = {
       currentLocation: 'San Francisco',
       highLightedIdx: 0,
+      value: true
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -49,6 +51,7 @@ class FilterNavBar extends Component {
     });
   }
 
+          // <p className='filter-by'>Choose Your Filters:</p>
   render() {
     const defaultOption1 = "Transportation";
     const defaultOption2 = "Your kind of night";
@@ -56,7 +59,14 @@ class FilterNavBar extends Component {
     return (
       <div className="header">
         <div className="header-location-item">
-          <p className='filter-by'>Choose Your Filters:</p>
+          <p className="adventure-desc">Adventure Mode:</p>
+          <ToggleButton
+              value={ this.state.value || false }
+              onToggle={(value) => {
+                this.setState({
+                  value: !value,
+                })
+              }} />
         </div>
           <div className='food-category-div'>   
             <MultiSelect 

@@ -6,6 +6,8 @@ var leftPad = require('left-pad');
 var qs = require('querystring');
 var token;
 var fake = JSON.parse(fs.readFileSync('./fake.json'));
+var gFetch = require('graphql-fetch')('https://www.opentable.com/graphql');
+
 try {
   token = JSON.parse(fs.readFileSync('./accessToken.json'));
   axios.defaults.headers.authorization = "Bearer " + token.access_token;
@@ -209,19 +211,6 @@ module.exports.fetchEveningDates = (event, context, callback) => {
   constructChain();
 };
 
-// module.exports.fetchEveningDates(null, null, console.log);
-
-module.exports.fetchMyReservations = (event, context, callback) => {
-  // var vars = event;
-  // if (typeof vars === 'string') {
-  //   vars = JSON.parse(vars);
-  // }
-  var customResponse = {
-    statusCode: 200,
-    body: [""]
-  };
-  callback(null, customResponse);
-}
 
 var getSample = () => {
   var randomIndex = ~~(Math.random() * fake.length);
@@ -257,6 +246,113 @@ module.exports.itinerary = (event, context, callback) => {
 module.exports.lyft = (event, context, callback) => {
   callback(null, {statusCode: 201, body: "LYFT OK "});
 }
-// module.exports.listings({}, null, console.log);
 
+var retrieveRandomRestaurant = (rid) => {
+  var query = `
+  query {
+    restaurant (restaurantId: ${rid || ~~(Math.random() * 10000)}){
+      name
+      description
+      coordinates {
+        latitude
+        longitude
+      }
+    }
+  }
+  `;
+  return gFetch(query, {}, {});
+}
 
+module.exports.restaurantDetails = (event, context, callback) => {
+  var vars = event;
+  if (typeof vars === 'string') {
+    vars = JSON.parse(vars);
+  }
+  if (!vars) {
+    vars = {};
+  }
+  retrieveRandomRestaurant(vars.rid)
+  .then(result => {
+      // items.forEach((item, index, arr) => {
+  //   itinerary.push(item);
+  //   if (index !== arr.length -1) {
+  //     const random = Math.random() > .25;
+  //     var travel = {
+  //       name: random ? 'Travel' : 'Train',
+  //       icon: random ? 'walking' : 'car',
+  //       img: 'https://source.unsplash.com/random',
+  //       startTime: item.endTime,
+  //       endTime: arr[index + 1].startTime
+  //     }
+  //     itinerary.push(travel);
+  //   }
+  // });
+    callback(null, {statusCode: 200, body: JSON.stringify(result)});
+  })
+  .catch(e => callback(e));
+}
+
+var makeMealTypes = (num = 6) => ['Dessert', 'Dinner', 'Coffee', 'Lunch', 'Breakfast'].slice(0, num);
+module.exports.fetchRestaurantItinerary = (event, context, callback) => {
+  var vars = event || {};
+  if (typeof vars === 'string') {
+    vars = JSON.parse(vars);
+  }
+
+  var num = vars.count || 5;
+  var result = {
+    user: vars.user || "You",
+    pair: vars.friend || "Friend",
+    schedule: []
+  }
+  var checkComplete = (count) => {
+    if (result.length > num || count === num) {
+      var items = result.schedule;
+      var itinerary = [];
+      items.forEach((item, index, arr) => {
+        itinerary.push(item);
+        if (index !== arr.length -1) {
+          const random = Math.random() > .25;
+          var travel = {
+            name: random ? 'Travel' : 'Walk',
+            icon: random ? 'car' : 'walking',
+            img: 'https://source.unsplash.com/random',
+            startTime: item.endTime,
+            endTime: arr[index + 1].startTime
+          }
+          itinerary.push(travel);
+        }
+      });
+      result.schedule = itinerary;
+      callback(null, {statusCode: 200, body: JSON.stringify(result)});
+    }
+  }
+  var runCount = 0;
+  var mealTypes = makeMealTypes(num + 1);
+  var currentTime = new Date();
+  currentTime.setHours(10);
+  currentTime.setMinutes(0);
+  currentTime.setSeconds(0);
+  currentTime.setMilliseconds(0);
+  for (var i = 0; i < num; i++) {
+    retrieveRandomRestaurant().then(response => {
+      if (mealTypes.length > 0 && response.data.restaurant) { 
+        var scheduleItem = {};
+        scheduleItem.name = mealTypes.pop();
+        scheduleItem.desc = response.data.restaurant.name;
+        scheduleItem.icon = 'dish';
+        scheduleItem.img = "http://openforbusiness.opentable.com/wp-content/uploads/2016/08/EWP2016_ThirstyBear-0366.jpg";
+        scheduleItem.startTime = currentTime.getTime();
+        currentTime.setHours(currentTime.getHours() + ~~((Math.random() * 1) + 1));
+        currentTime.setMinutes(currentTime.getMinutes() + ~~((Math.random() * 2) * 30));
+        scheduleItem.endTime = currentTime.getTime();
+        currentTime.setHours(currentTime.getHours() + ~~((Math.random() * 1) + 1));
+        currentTime.setMinutes(currentTime.getMinutes() + ~~((Math.random() * 2) * 30));
+        result.schedule.push(scheduleItem);
+        checkComplete(++runCount);
+      } else {
+        checkComplete(++runCount);
+      }
+    }).catch(callback);
+  }
+}
