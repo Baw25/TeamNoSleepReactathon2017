@@ -242,7 +242,6 @@ module.exports.itinerary = (event, context, callback) => {
   callback(null, {statusCode: 200, body: JSON.stringify(fakeItinerary)});
 }
 
-
 module.exports.lyft = (event, context, callback) => {
   callback(null, {statusCode: 201, body: "LYFT OK "});
 }
@@ -292,7 +291,7 @@ module.exports.restaurantDetails = (event, context, callback) => {
   .catch(e => callback(e));
 }
 
-var makeMealTypes = (num = 6) => ['Dessert', 'Dinner', 'Coffee', 'Lunch', 'Breakfast'].slice(0, num);
+var makeMealTypes = (num) => ['Dessert', 'Dinner', 'Coffee', 'Lunch', 'Breakfast'].slice(0, num);
 module.exports.fetchRestaurantItinerary = (event, context, callback) => {
   var vars = event || {};
   if (typeof vars === 'string') {
