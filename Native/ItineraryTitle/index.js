@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import React, {
   Component,
 } from 'react';
@@ -45,7 +47,7 @@ class ItineraryTitle extends Component {
     } = this.props;
 
     const date = new Date(time);
-    const dateString = date.toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour12: true });
+    const dateString = moment(date).format('ddd h:mm a');
 
     return (
       <View style={styles.container}>
