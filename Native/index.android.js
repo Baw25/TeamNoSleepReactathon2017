@@ -17,6 +17,7 @@ import DateNightToolbar from './DateNightToolbar';
 import ItineraryItem from './ItineraryItem';
 import ItineraryTitle from './ItineraryTitle';
 
+
 class android extends Component {
   constructor(props) {
     super(props);
@@ -37,11 +38,9 @@ class android extends Component {
   render() {
     const { items } = this.state;
     return (
-      <View style={styles.foolPage}>
+      <View style={styles.page}>
         <DateNightToolbar />
-        <ScrollView
-          ref={(scrollView) => {this._sv = scrollView}}
-        >
+        <ScrollView style={styles.scrollview}>
           {items.map(this._boundItem)}
         </ScrollView>
       </View>
@@ -59,8 +58,12 @@ class android extends Component {
 }
 
 const styles = StyleSheet.create({
-  fullpage: {
-    backgroundColor: '#dddddd',
+  page: {
+    flexGrow: 1,
+    flexBasis: '100%',
+  },
+  scrollview: {
+    backgroundColor: '#dfdfdf',
     flexGrow: 1,
     flexShrink: 0,
   },
