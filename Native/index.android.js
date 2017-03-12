@@ -10,8 +10,10 @@ import {
   StyleSheet,
   ScrollView,
   Text,
+  View,
 } from 'react-native';
 
+import DateNightToolbar from './DateNightToolbar';
 import ItineraryItem from './ItineraryItem';
 import ItineraryTitle from './ItineraryTitle';
 
@@ -35,12 +37,14 @@ class android extends Component {
   render() {
     const { items } = this.state;
     return (
-      <ScrollView
-        ref={(scrollView) => {this._sv = scrollView}}
-        style={styles.fullpage}
-      >
-        {items.map(this._boundItem)}
-      </ScrollView>
+      <View style={styles.foolPage}>
+        <DateNightToolbar />
+        <ScrollView
+          ref={(scrollView) => {this._sv = scrollView}}
+        >
+          {items.map(this._boundItem)}
+        </ScrollView>
+      </View>
     );
   }
 
@@ -59,12 +63,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
     flexGrow: 1,
     flexShrink: 0,
-    flexBasis: '100%'
+  },
+  toolbar: {
+    flexGrow: 0,
+    flexShrink: 0,
   },
 });
 
 AppRegistry.registerComponent('android', () => android);
-AppRegistry.registerComponent('ItineraryItem', () => ItineraryItem);
-AppRegistry.registerComponent('ItineraryTitle', () => ItineraryTitle);
 
 export default android;
