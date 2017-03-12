@@ -4,13 +4,73 @@
 
 .Search {
   display: flex;
+  flex-direction: column;
   min-height: 400px;
   height: 100vh;
   width: 100%;
-  justify-content: center;
-  align-items: center;
   background-image: url('../../assets/sf.jpg');
   background-position: center;
   background-size: cover;
   color: white;
+}
+
+.logo {
+  padding-top: 100px;
+  display: flex;
+  align-self: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  height: 230px;
+}
+
+.select-date {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.select-date input {
+  text-align: center;
+  height: 35px;
+  font-size: 20px;
+  background-color: transparent;
+  background-color: rgba(35, 35, 35, 0.8);
+  border: none;
+  color: white;
+  outline: none;
+}
+
+.cal_img {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  z-index: 10;
+  left: 10px;
+}
+
+.cal_img img {
+  width: 100%;
+}
+
+.react-datepicker-ignore-onclickoutside {
+  text-align: center;
+  height: 35px;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.submit {
+  background-color: #FF5645;
+  color: white;
+  height: 37px;
+  font-size: 15px;
+  border: none;
+  border-radius: 0px;
 }
