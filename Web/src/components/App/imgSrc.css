@@ -7,3 +7,6 @@
 .logo{
   content:url("../../assets/logo.png")
 }
+.backimg {
+  content: url("../../assets/groups.png");
+}

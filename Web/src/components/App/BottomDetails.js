@@ -7,6 +7,7 @@ import View from './view.js';
 
 // import Booking from "./Booking"
 import './BottomDetails.css'
+import './imgSrc.css';
 
 const mapper = [
   ['1',"Bar Agricole","Californian | SOMA","Booked 32 times"],
