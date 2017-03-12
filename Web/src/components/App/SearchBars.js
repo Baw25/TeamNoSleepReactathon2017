@@ -39,10 +39,9 @@ const getSuggestions = value => {
 const getSuggestionValue = suggestion => suggestion;
 
 const renderSuggestion = suggestion => suggestion;
-
 const renderInputComponent = inputProps => (
   <div className="inputContainer">
-    <img className="icon" src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-128.png" />
+    <img className="icon" src="https://brand.opentable.com/wp-content/uploads/2015/03/OTLogo_rationalizationhor-r1c-01.png" />
     <input {...inputProps} />
   </div>
 );
