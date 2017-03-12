@@ -1,5 +1,6 @@
 import React from 'react';
 import './card.css';
+import View from './view';
 
 //resturant schema
 //address: string
@@ -44,6 +45,7 @@ class Card extends React.Component {
     return (
       <div className={`Card ${vibe} ${this.state.show ? 'show' : ''}`}>
         <div className="card-header">
+          <View name={name}/>
           <p>{name}</p>
           <span>{dollars}</span>
         </div>

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import Card from './Card.js';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import {ModalContainer, ModalDialog} from 'react-modal-dialog';
+import View from './view.js';
 
 // import Booking from "./Booking"
 import './BottomDetails.css'
@@ -49,9 +51,9 @@ class BottomDetails extends Component {
               className="OrderContainers"
               transitionName="example"
               transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}
+              transitionLeaveTimeout={500}
             >
-              {this.state.list.length >= 1 ? this.state.list.map((rest) => <Card rest={rest} show={true}/>) : null}
+              {this.state.list.length >= 1 ? this.state.list.map((rest) => <Card rest={rest} show={true}/>) : <img className="backimg" src='src/assets/groups.png'/>}
             </ReactCSSTransitionGroup>
           </div>
       </div>
