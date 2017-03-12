@@ -7,7 +7,6 @@ var qs = require('querystring');
 var token;
 var fake = JSON.parse(fs.readFileSync('./fake.json'));
 var gFetch = require('graphql-fetch')('https://www.opentable.com/graphql');
-var firebase = require('firebase');
 var config = {
   apiKey: "AIzaSyDtVF-t3CztPSr_Oymp5SlM9vuxtVnEyTk",
   authDomain: "reactathon-d75ec.firebaseapp.com",
@@ -15,7 +14,6 @@ var config = {
   storageBucket: "reactathon-d75ec.appspot.com",
   messagingSenderId: "240328496149"
 };
-var app = firebase.initializeApp(config);
 var striptags = require('striptags');
 var imgs = fs.readFileSync('./images.txt').toString().split('\n');
 try {
@@ -38,7 +36,7 @@ var ensureProps = function(obj, props) {
 
 var dayToMS = (days) => 24 * 60 * 60 * 1000 * days;
 var oneDay = dayToMS(1);
-var constructResponse = (response) => ({statusCode: response.status, body: JSON.stringify(response.data)});
+var constructResponse = (response) => ({statusCode: response.status, headers: {"Access-Control-Allow-Origin" : "*"}, body: JSON.stringify(response.data)});
 var constructFromUTC = (epoch) => {
   var date = new Date(epoch);
   return date.getYear() + 1900 + '-' + leftPad(date.getMonth()+1, 2, 0) + '-' + leftPad(date.getDay()+1, 2, 0) + 'T' + leftPad(date.getHours(), 2, 0) + ':' + leftPad(date.getMinutes(), 2, 0);
@@ -295,11 +293,11 @@ module.exports.itinerary = (event, context, callback) => {
   //     itinerary.push(travel);
   //   }
   // });
-  callback(null, {statusCode: 200, body: JSON.stringify(fakeItinerary)});
+  callback(null, {statusCode: 200, headers: {"Access-Control-Allow-Origin" : "*"}, body: JSON.stringify(fakeItinerary)});
 }
 
 module.exports.lyft = (event, context, callback) => {
-  callback(null, {statusCode: 201, body: "LYFT OK "});
+  callback(null, {statusCode: 201, headers: {"Access-Control-Allow-Origin" : "*"}, body: "LYFT OK "});
 }
 
 var retrieveRandomRestaurant = (rid) => {
@@ -342,7 +340,7 @@ module.exports.restaurantDetails = (event, context, callback) => {
   //     itinerary.push(travel);
   //   }
   // });
-    callback(null, {statusCode: 200, body: JSON.stringify(result)});
+    callback(null, {statusCode: 200, headers: {"Access-Control-Allow-Origin" : "*"}, body: JSON.stringify(result)});
   })
   .catch(e => callback(e));
 }
@@ -379,7 +377,7 @@ module.exports.fetchRestaurantItinerary = (event, context, callback) => {
         }
       });
       result.schedule = itinerary;
-      callback(null, {statusCode: 200, body: JSON.stringify(result)});
+      callback(null, {statusCode: 200, headers: {"Access-Control-Allow-Origin" : "*"}, body: JSON.stringify(result)});
     }
   }
   var runCount = 0;
