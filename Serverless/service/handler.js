@@ -224,14 +224,13 @@ module.exports.fetchMyReservations = (event, context, callback) => {
 }
 
 var getSample = () => {
-  let randomIndex = ~~(Math.random() * fake.length);
+  var randomIndex = ~~(Math.random() * fake.length);
   return fake.slice(randomIndex, randomIndex + (~~(Math.random() * 5)+1)).sort((a,b) => a.startTime - b.startTime);
 }
 
 
 module.exports.itinerary = (event, context, callback) => {
-  var vars = typeof event === 'object' && event ? JSON.parse(event) : {};
-  var items = vars.items || getSample();
+  var items = getSample();
   items = items.sort((a,b) => {
     a.startTime - b.startTime;
   });
@@ -239,9 +238,9 @@ module.exports.itinerary = (event, context, callback) => {
   items.forEach((item, index, arr) => {
     itinerary.push(item);
     if (index !== arr.length -1) {
-      let travel = {
-        name: Math.random() > .25 ? 'Car' : 'Train',
-        img: 'https://source.unsplash.com/random',
+      var travel = {
+        name: Math.random() > .25 ? 'Travel' : 'Train',
+        img: 'http://stashflaticons.com/images/car-flat-icons.svg',
         startTime: item.endTime,
         endTime: arr[index + 1].startTime
       }
@@ -250,5 +249,12 @@ module.exports.itinerary = (event, context, callback) => {
   });
   callback(null, {statusCode: 200, body: JSON.stringify(itinerary)});
 }
+
+
+module.exports.lyft = (event, context, callback) => {
+  callback(null, {statusCode: 201, body: "LYFT OK "});
+}
+// module.exports.listings({}, null, console.log);
+
 
 

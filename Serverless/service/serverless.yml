@@ -41,4 +41,10 @@ functions:
           method: get
           path: itinerary
           cors: true
-          
+  lyft:
+    handler: handler.lyft
+    events:
+      - http:
+          method: post
+          path: lyft
+          cors: true
