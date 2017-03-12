@@ -19,12 +19,17 @@ class App extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(date) {
     this.setState({
       date
     });
+  }
+
+  handleClick() {
+
   }
 
   render() {
@@ -35,6 +40,7 @@ class App extends Component {
       <div className="App">
           <div className="Search">
             <Header currentLocation="San Francisco" />
+
             <div className="logo">
               <img src='/src/assets/logo.png' />
             </div>
@@ -49,10 +55,10 @@ class App extends Component {
                 />
                 <div className="location">
                   <input
-                    placeholder="Location..."
+                    placeholder="Location or Restaurant"
                   />
                 </div>
-                <button className="submit">
+                <button className="submit" onClick={this.handleClick}>
                   Search
                 </button>
               </div>
