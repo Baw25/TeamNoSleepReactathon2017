@@ -19,8 +19,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 8,
   },
+  descriptionInverse: {
+    color : '#fff',
+    fontSize: 16,
+    marginTop: 8,
+  },
   title: {
     color: '#666666',
+    fontSize: 12,
+  },
+  titleInverse: {
+    color: '#fff',
     fontSize: 12,
   },
 });
@@ -32,10 +41,12 @@ class ItineraryTitle extends Component {
       name,
     } = this.props;
 
+    const mystery = name === 'Adventure';
+
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{name.toUpperCase()}</Text>
-        <Text style={styles.description}>{desc}</Text>
+        <Text style={mystery ? styles.titleInverse : styles.title}>{name.toUpperCase()}</Text>
+        <Text style={mystery ? styles.descriptionInverse : styles.description}>{desc}</Text>
       </View>
     );
   }

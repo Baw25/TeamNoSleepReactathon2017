@@ -26,6 +26,13 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     margin: 16,
   },
+  cardInverse: {
+    backgroundColor: '#ff5645',
+    borderRadius: 4,
+    elevation: 4,
+    flexGrow: 1,
+    margin: 16,
+  },
   container: {
     flexDirection: 'row',
     marginLeft: 16,
@@ -86,6 +93,7 @@ class ItineraryItem extends Component {
     const sidebarProps = {
       bottom,
       icon,
+      name,
       top,
     };
 
@@ -96,6 +104,7 @@ class ItineraryItem extends Component {
 
     const time = new Date(startTime * 1000);
     const timeString = moment(time).format('h:mm A');
+    const mystery = name === 'Adventure';
 
     return (
       <View style={styles.container}>
@@ -104,7 +113,7 @@ class ItineraryItem extends Component {
         </View>
         <ItinerarySidebar {...sidebarProps} />
         <TouchableOpacity onPress={this._boundToggle} style={styles.touchable}>
-          <View style={styles.card}>
+          <View style={mystery ? styles.cardInverse : styles.card}>
             <ItineraryTitle {...titleProps} />
 
             <Animated.Image
@@ -120,7 +129,7 @@ class ItineraryItem extends Component {
                   transform: [{ rotate: expanded ? '0deg' : '180deg' }]
                 }}
                 source={require('./arrow.png')}
-                tintColor='#ccc'
+                tintColor={mystery ? '#fff' : '#ccc'}
               />
             </View>
           </View>
