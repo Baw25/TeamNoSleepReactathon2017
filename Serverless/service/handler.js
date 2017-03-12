@@ -46,9 +46,20 @@ var findMissing = function(obj, props) {
   return missing;
 }
 
+var fixPhoneNumber = (phony) => {
+  while(phony.endsWith('x')) {
+    phony = phony.slice(0,-1);
+  }
+  return '(' + phony.slice(0,3) + ')-' + phony.slice(3,6) + '-' + phony.slice(6);
+}
 module.exports.listings = (event, context, callback) => {
   axios.get('https://platform.otqa.com/sync/listings')
   .then(response => {
+    response.data.items = response.data.items.map(item => {
+      item.phone_number = fixPhoneNumber(item.phone_number);
+      return item;
+    });
+    console.log(response.data);
     var customResponse =  constructResponse(response);
     callback(null, customResponse);
   })
@@ -57,6 +68,7 @@ module.exports.listings = (event, context, callback) => {
   });
 };
 
+module.exports.listings(null, null, ()=>{})
 
 var availableIds = [334879, 334882, 334885, 334888, 334891, 334894, 334897, 334900, 334903];
 
@@ -105,14 +117,6 @@ module.exports.availability = (event, context, callback) => {
   })
   .catch(callback);
 };
-
-// module.exports.availability(null, null, (e, r) => {
-//   if (e) {
-//     console.log(e.response.data);
-//   } else {
-//     console.log(JSON.parse(r.body));
-//   }
-// });
 
 var requiredProvisionParams = ['partySize', 'dateTime', 'restaurantId'];
 var constructProvisionParameterError = () => new Error(`Body with ${requiredProvisionParams} is required for provisioning a token`);
@@ -211,15 +215,6 @@ module.exports.reserve = (event, context, callback) => {
     });
   });
 }
-// module.exports.reserve(null, null, (e, r) => {
-//   if (e) {
-//     console.log(e.response.data);
-//   }
-// });
-
-// module.exports.provision({partySize: 3, dateTime: constructFromUTC(Date.now()+389120302343984), restaurantId: 440}, null, console.log);
-// module.exports.reserve({firstName: 'me', emailAddress: 'g@gmail.com', lastName: 'hi', reservationToken: '123', restaurantId: 440}, null, console.log);
-
 
 module.exports.locationAvailability = (event, context, callback) => {
   var vars = event;
@@ -238,14 +233,6 @@ module.exports.locationAvailability = (event, context, callback) => {
   })).then(response => callback(null, response))
   .catch(error => callback(error));
 }
-
-// module.exports.locationAvailability({startDateTime: constructFromUTC(Date.now() + oneDay * 30 * 30), partySize: 2}, null, (e, r) => {
-//   console.log(e, r);
-//   if (e) {
-//     console.log(e.response.data);
-//   }
-// });
-
 
 
 module.exports.fetchEveningDates = (event, context, callback) => {
