@@ -1,5 +1,7 @@
+import Dimensions from 'Dimensions';
 import React, { Component } from 'react';
 import {
+  Animated,
   AppRegistry,
   Image,
   StyleSheet,
@@ -18,11 +20,16 @@ const autoExpandList = [
   'Movie',
 ];
 
+const { width, height } = Dimensions.get('screen');
+
 class android extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { itinerary: { user: 'John Kim', pair: 'Chimi Kim', schedule: [] } };
+    this.state = {
+      fade: new Animated.Value(1.0),
+      itinerary: { user: '', pair: '', schedule: [] },
+    };
 
     this._boundItem = this._renderItem.bind(this);
   }
@@ -31,12 +38,16 @@ class android extends Component {
     fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/ritinerary')
       .then(response => response.json())
       .then(itinerary => {
+        Animated
+          .timing(this.state.fade, { toValue: 0.0, duration: 1000 })
+          .start();
+
         this.setState({ itinerary });
       });
   }
 
   render() {
-    const { user, pair, schedule } = this.state.itinerary;
+    const { fade, itinerary: { user, pair, schedule } } = this.state;
     const startTime = schedule.length > 0 ? schedule[0].startTime : 0;
     const toolbarParam = { user, pair, startTime };
 
@@ -48,6 +59,14 @@ class android extends Component {
           <View style={{ height: 50 }} />
         </ScrollView>
         <DateNightFooter />
+        <Animated.View
+          style={[
+            styles.overlay,
+            { opacity: fade },
+          ]}
+        >
+          <Image source={require('./DateNightFooter/logo.png')} />
+        </Animated.View>
       </View>
     );
   }
@@ -68,6 +87,18 @@ class android extends Component {
 }
 
 const styles = StyleSheet.create({
+  overlay: {
+    alignItems: 'center',
+    backgroundColor: '#374249',
+    justifyContent: 'center',
+    paddingBottom: 120,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    elevation: 32,
+    width: width,
+    height: height,
+  },
   page: {
     flexGrow: 1,
     flexBasis: '100%',
