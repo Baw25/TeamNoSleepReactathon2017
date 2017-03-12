@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 
 import {
+  Image,
   StyleSheet,
   Text,
   View,
@@ -15,8 +16,7 @@ const styles = StyleSheet.create({
     flex : 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    height: 75,
-    padding: 5,
+    padding: 16,
   },
   contentContainer: {
     alignItems: 'center',
@@ -27,9 +27,8 @@ const styles = StyleSheet.create({
     color: '#666666'
   },
   image: {
-    backgroundColor: '#999999',
     height: 40,
-    marginRight: 10,
+    marginRight: 16,
     width: 40,
   },
   textContainer: {
@@ -39,12 +38,20 @@ const styles = StyleSheet.create({
   },
   time: {
     color: '#999999',
-    marginBottom: 5,
+    marginBottom: 8,
   },
   title: {
     color : '#000000',
   },
 });
+
+
+const icons = {
+  bench: require('./bench.png'),
+  dish: require('./dish.png'),
+  fireworks: require('./fireworks.png'),
+  walking: require('./walking.png'),
+}
 
 class ItineraryTitle extends Component {
   constructor(props) {
@@ -53,6 +60,7 @@ class ItineraryTitle extends Component {
 
   render() {
     const {
+      icon,
       title,
       time,
     } = this.props;
@@ -64,7 +72,10 @@ class ItineraryTitle extends Component {
       <View style={styles.container}>
         <Text style={styles.time}>{dateString}</Text>
         <View style={styles.contentContainer}>
-          <View style={styles.image}/>
+          <Image
+            source={icons[icon]}
+            style={styles.image}
+          />
           <View style={styles.textContainer}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.description}>Julian give me desc</Text>

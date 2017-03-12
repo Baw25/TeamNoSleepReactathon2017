@@ -17,6 +17,13 @@ import DateNightToolbar from './DateNightToolbar';
 import ItineraryItem from './ItineraryItem';
 import ItineraryTitle from './ItineraryTitle';
 
+const icons = [
+  'bench',
+  'dish',
+  'fireworks',
+  'walking',
+];
+
 class android extends Component {
   constructor(props) {
     super(props);
@@ -30,18 +37,20 @@ class android extends Component {
     fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
       .then(response => response.json())
       .then(itineraries => {
-        this.setState({ items: itineraries });
+        this.setState({ items: itineraries.map((item, index) => {
+          return Object.assign({
+            icon: icons[index % icons.length],
+          }, item);
+        }) });
       });
   }
 
   render() {
     const { items } = this.state;
     return (
-      <View style={styles.foolPage}>
+      <View style={styles.page}>
         <DateNightToolbar />
-        <ScrollView
-          ref={(scrollView) => {this._sv = scrollView}}
-        >
+        <ScrollView style={styles.scrollview}>
           {items.map(this._boundItem)}
         </ScrollView>
       </View>
@@ -59,8 +68,12 @@ class android extends Component {
 }
 
 const styles = StyleSheet.create({
-  fullpage: {
-    backgroundColor: '#dddddd',
+  page: {
+    flexGrow: 1,
+    flexBasis: '100%',
+  },
+  scrollview: {
+    backgroundColor: '#dfdfdf',
     flexGrow: 1,
     flexShrink: 0,
   },
