@@ -1,36 +1,9 @@
 import React, {Component} from 'react';
 import SearchBars from './SearchBars.js';
+// import MultiSelect from './MultiSelect.js';
+import TextSelect from 'react-textselect';
+import 'react-textselect/dist/textselect.css';
 import './style.css';
-
-// const foodCategories = [
-//   'Italian',
-//   'Korean', 
-//   'Contemporary American',
-//   'Californian',
-//   'Japanese',
-//   'Chinese',
-//   'Spanish Tapas',
-//   'French',
-//   'Mexican',
-//   'Mediterranean',
-//   'Seafood',
-//   'Peruvian',
-//   'Moroccan'
-// ];
-
-// const emotions = [
-//   'Going somewhere far',
-//   'I want to keep it in my neighborhood',
-//   'Romantic',
-//   'Adventurous'
-// ];
-
-// const travel =- [
-//   'Walking',
-//   'Driving',
-//   ''
-// ];
-
 
 class FilterNavBar extends Component {
 
@@ -56,12 +29,6 @@ class FilterNavBar extends Component {
       currentLocation: e.target.value
     });
   }
-          // <input
-          //   placeholder="Food Preferences"
-          //   onChange={this.handleInput}
-          // />
-
-  //change the cursives here
 
   render() {
     return (
@@ -70,7 +37,10 @@ class FilterNavBar extends Component {
           <p className='filter-by'>Choose Your Filters:</p>
         </div>
           <div className='food-category-div'>        
-            <SearchBars className='searchbar-food' />
+            <TextSelect
+              options={['Surprise Me!', 'Keep it chill', 'Let us rage']}
+              active={this.state.selectedOption}
+              onChange={this.onTextSelectChange} />
           </div>
         <div className="header-subsection">
           <a className={this.state.highLightedIdx === 1 ? 'highlighted' : '' } onClick={() => this.handleClick(1)}>Italian</a>
@@ -82,8 +52,3 @@ class FilterNavBar extends Component {
 
 export default FilterNavBar;
 
-          // <a className={this.state.highLightedIdx === 3 ? 'highlighted' : '' } onClick={() => this.handleClick(3)}>Tapas</a>
-          // <a className={this.state.highLightedIdx === 2 ? 'highlighted' : '' } onClick={() => this.handleClick(2)}>Californian</a>
-          // <div className='budget-category-div'>        
-          //   <SearchBar className='searchbar-food' />
-          // </div>
