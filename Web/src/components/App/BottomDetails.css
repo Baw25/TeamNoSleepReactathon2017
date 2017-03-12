@@ -1,14 +1,17 @@
 .OrderBackground {
   background-color: #F0F5F9;
   padding-bottom: 100px;
+  min-height: 800px;
+  height: 100%;
 }
 
 .OrderContainers {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
   margin: 0 auto;
   max-width: 1000px;
+  flex-grow: 1;
+  flex-wrap: wrap;
   background-color: #F0F5F9;
 }
 
@@ -114,3 +117,21 @@
   height:30px;
 }*/
 
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
