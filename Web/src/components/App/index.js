@@ -49,7 +49,6 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
   }
 
   render() {
@@ -59,7 +58,6 @@ class App extends Component {
     return (
       <div className="App">
           <div className="Search">
-            {console.log(this.props)}
             <Header currentLocation="San Francisco" />
             <div className="logo">
               <img src='/src/assets/logo.png' />

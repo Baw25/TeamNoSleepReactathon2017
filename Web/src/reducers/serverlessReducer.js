@@ -46,23 +46,23 @@ const dollars = [
 ];
 
 const vibes = [
-  'trendy',
-  'chill',
-  'sporty',
-  'cocktails',
-  'close',
-  'romantic'
+  "Trending spots only",
+  "Keep it chill",
+  "Sporty or dive bars",
+  "I dig cocktails",
+  "Keep it close to home",
+  "Romantic only",
+  "With live music"
 ];
 
 function addDateNightFilters(data) {
-  console.log(data)
   data.map((restaurant) => {
-    restaurant.category = categories[Math.floor(Math.random()*categories.length)];
-    restaurant.dollar = dollars[Math.floor(Math.random()*dollars.length)];
+    restaurant.options = categories[Math.floor(Math.random()*categories.length)];
+    restaurant.dollars = dollars[Math.floor(Math.random()*dollars.length)];
     restaurant.vibe = vibes[Math.floor(Math.random()*vibes.length)];
     if (restaurant.name === 'Thirsty Bear') {
-      restaurant.category = 'American';
-      restaurant.dollar = '$$$';
+      restaurant.options = 'American';
+      restaurant.dollars = '$$$';
       restaurant.vibe = 'chill';
     }
   })
