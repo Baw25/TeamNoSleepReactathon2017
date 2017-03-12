@@ -7,18 +7,18 @@ body {
 }
 
 .react-autosuggest__input {
-  margin-top: 8%;
+  margin-top: 15px;
   margin-left: 2%;
-  margin-right:2%;
+  margin-right:3px;
   padding-left: 1%;
   width: 130px;
-  height: 15.2px;
+  height: 13.5px;
   padding: 10px 20px 10px 40px;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
   font-size: 16px;
-  border: 1px solid #aaa;
-  border-radius: 0px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
 }
 
 .react-autosuggest__input--focused {

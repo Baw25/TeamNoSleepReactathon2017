@@ -57,7 +57,7 @@ class FilterNavBar extends Component {
     const defaultOption2 = "Your kind of night";
     const budgetDefault = 'Budget Preference';
     return (
-      <div className="header">
+      <div className="filter-header">
         <div className="header-location-item">
           <p className="adventure-desc">Adventure Mode:</p>
           <ToggleButton
@@ -92,9 +92,6 @@ class FilterNavBar extends Component {
               value={budgetDefault} 
               placeholder="Select an option" />     
           </div>
-        <div className="header-subsection">
-          <a className={this.state.highLightedIdx === 1 ? 'highlighted' : '' } onClick={() => this.handleClick(1)}></a>
-        </div>
       </div> 
     );
   }
