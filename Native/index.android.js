@@ -51,10 +51,12 @@ class android extends Component {
     );
   }
 
-  _renderItem(item, index) {
+  _renderItem(item, index, items) {
     return (
       <ItineraryItem
         key={index}
+        top={index > 0}
+        bottom={index < items.length - 1}
         {...item}
       />
     );

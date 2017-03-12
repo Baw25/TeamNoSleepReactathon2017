@@ -62,15 +62,22 @@ class ItineraryItem extends Component {
     } = this.state;
 
     const {
+      bottom,
       desc,
       endTime,
       icon,
+      img,
       name,
       startTime,
-      img,
+      top,
     } = this.props;
 
-    const sidebarProps = { icon };
+    const sidebarProps = {
+      bottom,
+      icon,
+      top,
+    };
+
     const titleProps = {
       desc,
       name,

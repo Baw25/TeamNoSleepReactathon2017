@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     width: 12,
   },
   bar: {
-    backgroundColor: '#cccccc',
     width: 8,
   },
   bottom: {
@@ -55,24 +54,35 @@ const styles = StyleSheet.create({
   top: {
     height: 36,
   },
+  filled: {
+    backgroundColor: '#cccccc',
+  },
 });
 
 class ItinerarySidebar extends Component {
   render() {
     const {
+      bottom,
       icon,
+      top,
     } = this.props;
+
+    const topStyles = [styles.bar, styles.top];
+    if (top) topStyles.push(styles.filled);
+
+    const bottomStyles = [styles.bar, styles.bottom];
+    if (bottom) bottomStyles.push(styles.filled);
 
     return (
       <View style={styles.container}>
-        <View style={[styles.bar, styles.top]} />
+        <View style={topStyles} />
         <View style={styles.imageContainer}>
           <Image
             source={icons[icon]}
             style={styles.image}
           />
         </View>
-        <View style={[styles.bar, styles.bottom]} />
+        <View style={bottomStyles} />
       </View>
     );
   }
