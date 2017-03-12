@@ -6,8 +6,7 @@ class Header extends React.Component {
     super();
   
     this.state = {
-      currentLocation: 'San Francisco',
-      highLightedIdx: 0,
+      highLightedIdx: 3,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -29,15 +28,12 @@ class Header extends React.Component {
     return (
       <div className="header">
         <div className="header-location-item">
-          <input
-            placeholder="San Francisco"
-            onChange={this.handleInput}
-          />
+          <h4>{this.props.currentLocation}</h4>
         </div>
         <div className="header-subsection">
-          <a className={this.state.highLightedIdx === 1 ? 'highlighted' : '' } onClick={() => this.handleClick(1)}>Date Nights</a>
-          <a className={this.state.highLightedIdx === 2 ? 'highlighted' : '' } onClick={() => this.handleClick(2)}>Account</a>
-          <a className={this.state.highLightedIdx === 3 ? 'highlighted' : '' } onClick={() => this.handleClick(3)}>Message</a>
+          <a className={this.state.highLightedIdx === 1 ? 'highlighted' : '' } onClick={() => this.handleClick(1)}>Account</a>
+          <a className={this.state.highLightedIdx === 2 ? 'highlighted' : '' } onClick={() => this.handleClick(2)}>Message</a>
+          <a className={this.state.highLightedIdx === 3 ? 'highlighted' : '' } onClick={() => this.handleClick(3)}>Date Nights</a>
         </div>
       </div> 
     );

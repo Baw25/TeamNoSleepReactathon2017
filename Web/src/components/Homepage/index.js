@@ -6,7 +6,6 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        homepage goes here
         <BottomDetails/>
       </div>
     );

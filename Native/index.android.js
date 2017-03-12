@@ -13,36 +13,50 @@ import {
 } from 'react-native';
 
 import ItineraryItem from './ItineraryItem';
+import ItineraryTitle from './ItineraryTitle';
 
 class android extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      items: [
-        { title: 'Hello this is title', url: 'http://placehold.it/300x200' }
-      ]
-    };
+    this.state = { items: [] };
 
     this._boundItem = this._renderItem.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
+      .then(response => response.json())
+      .then(itineraries => {
+        this.setState({ items: itineraries });
+      });
   }
 
   render() {
     const { items } = this.state;
     return (
-      <ScrollView style={styles.fullpage}>
+      <ScrollView
+        ref={(scrollView) => {this._sv = scrollView}}
+        style={styles.fullpage}
+      >
         {items.map(this._boundItem)}
       </ScrollView>
     );
   }
 
   _renderItem(item, index) {
-    return (<ItineraryItem key={index} {...item} />);
+    return (
+      <ItineraryItem
+        key={index}
+        {...item}
+      />
+    );
   }
 }
 
 const styles = StyleSheet.create({
   fullpage: {
+    backgroundColor: '#dddddd',
     flexGrow: 1,
     flexShrink: 0,
     flexBasis: '100%'
@@ -51,5 +65,6 @@ const styles = StyleSheet.create({
 
 AppRegistry.registerComponent('android', () => android);
 AppRegistry.registerComponent('ItineraryItem', () => ItineraryItem);
+AppRegistry.registerComponent('ItineraryTitle', () => ItineraryTitle);
 
 export default android;
