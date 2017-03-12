@@ -51,7 +51,7 @@ class ItineraryItem extends Component {
 
     const {
       endTime,
-      title,
+      name,
       startTime,
       img,
     } = this.props;
@@ -61,7 +61,7 @@ class ItineraryItem extends Component {
 
         <TouchableWithoutFeedback onPress={this._boundToggle} >
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title}>{name}</Text>
           </View>
         </TouchableWithoutFeedback>
 

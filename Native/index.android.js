@@ -18,16 +18,17 @@ class android extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      items: [
-        { title: 'Hello this is title', url: 'http://placehold.it/300x200' },
-        { title: 'Hello this is other', url: 'http://placehold.it/200x100' },
-        { title: 'Bye this', url: 'http://placehold.it/800x120' },
-        { title: 'Bye is this hello', url: 'http://placehold.it/400x400' },
-      ]
-    };
+    this.state = { items: [] };
 
     this._boundItem = this._renderItem.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
+      .then(response => response.json())
+      .then(itineraries => {
+        this.setState({ items: itineraries });
+      });
   }
 
   render() {
