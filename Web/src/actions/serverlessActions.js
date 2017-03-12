@@ -6,7 +6,9 @@ const serverlessActions = {
     return function (dispatch) {
     dispatch(requestTransactions())  
       const type = types.FETCH_OPENTABLE_LIST;
-      const instance = axios.get('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/listings')
+      const instance = axios.get('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/listings', {
+        headers: { "Access-Control-Allow-Origin", "*" }
+      })
       .then(function(res) {
         dispatch(receiveTransactions(res, type))
       })
@@ -19,7 +21,9 @@ const serverlessActions = {
     return function (dispatch) {
     dispatch(requestTransactions())  
       const type = types.MOCK_ITINERARY;
-      const instance = axios.get('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/ritinerary')
+      const instance = axios.get('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/ritinerary', {
+        headers: { "Access-Control-Allow-Origin", "*" }
+      })
       .then(function(res) {
         dispatch(receiveTransactions(res, type))
       })
@@ -32,7 +36,8 @@ const serverlessActions = {
     return {
       type: types.PROVISION_OPENTABLE,
       request: axios.post('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/provision', {
-        restaurantId, dateTime, partySize
+        restaurantId, dateTime, partySize,
+        headers: { "Access-Control-Allow-Origin", "*" }
       })
     }
   },
@@ -40,7 +45,8 @@ const serverlessActions = {
     return {
       type: types.RESERVE_OPENTABLE,
       request: axios.post('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/reserve', {
-        restaurantId, reservationToken, firstName, lastName, emailAddress, phoneNumber, countryCode: countryCode || 'USA'
+        restaurantId, reservationToken, firstName, lastName, emailAddress, phoneNumber, countryCode: countryCode || 'USA',
+        headers: { "Access-Control-Allow-Origin", "*" }
       })
     }
   },
@@ -48,7 +54,8 @@ const serverlessActions = {
     return {
       type: types.AVAILABILITY_OPENTABLE,
       request: axios.get('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/availability', {
-        restaurantId, startDateTime, timeBetween: timeBetween || 30
+        restaurantId, startDateTime, timeBetween: timeBetween || 30,
+        headers: { "Access-Control-Allow-Origin", "*" }
       })
     }
   },
