@@ -41,6 +41,15 @@ const styles = StyleSheet.create({
     marginTop: 28,
     width: 56,
   },
+  arrowContainer: {
+    alignItems: 'flex-end',
+    height: 16,
+    paddingTop: 4,
+    paddingRight: 8,
+  },
+  touchable: {
+    flexGrow: 1,
+  },
 });
 
 class ItineraryItem extends Component {
@@ -49,7 +58,7 @@ class ItineraryItem extends Component {
 
     this.state = {
       expanded: false,
-      animation: new Animated.Value(0),
+      expansion: new Animated.Value(0),
     };
 
     this._boundToggle = this._toggleExpanded.bind(this);
@@ -57,7 +66,7 @@ class ItineraryItem extends Component {
 
   render() {
     const {
-      animation,
+      expansion,
       expanded,
     } = this.state;
 
@@ -92,23 +101,35 @@ class ItineraryItem extends Component {
           <Text style={styles.time}>{timeString}</Text>
         </View>
         <ItinerarySidebar {...sidebarProps} />
-        <View style={styles.card}>
-          <TouchableOpacity onPress={this._boundToggle}>
+        <TouchableOpacity onPress={this._boundToggle} style={styles.touchable}>
+          <View style={styles.card}>
             <ItineraryTitle {...titleProps} />
-          </TouchableOpacity>
 
-          <Animated.Image
-            style={{ height: animation, marginBottom: expanded ? 16 : 0 }}
-            source={{ uri: img }}
-          />
-        </View>
+            <Animated.Image
+              style={{ height: expansion }}
+              source={{ uri: img }}
+            />
+
+            <View style={styles.arrowContainer}>
+              <Animated.Image
+                style={{
+                  height: 6,
+                  width: 8,
+                  transform: [{ rotate: expanded ? '0deg' : '180deg' }]
+                }}
+                source={require('./arrow.png')}
+                tintColor='#ccc'
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
 
   _toggleExpanded() {
     const {
-      animation,
+      expansion,
       expanded,
     } = this.state;
 
@@ -116,8 +137,8 @@ class ItineraryItem extends Component {
     const toValue = expanded ? 0.0 : contentHeight;
 
     this.setState({ expanded : !expanded });
-    animation.setValue(fromValue);
-    Animated.timing(animation, { toValue: toValue, duration: 100 }).start();
+    expansion.setValue(fromValue);
+    Animated.timing(expansion, { toValue: toValue, duration: 100 }).start();
   }
 }
 
