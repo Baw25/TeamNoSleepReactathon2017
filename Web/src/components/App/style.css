@@ -14,3 +14,10 @@
   background-size: cover;
   color: white;
 }
+
+.filter-by {
+  margin-top: 10%;
+  color: #ffffff;
+  font-size:20px;
+  font-family: 'Snell Roundhand, cursive';
+}
