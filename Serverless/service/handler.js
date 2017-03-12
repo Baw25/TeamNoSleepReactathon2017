@@ -225,7 +225,7 @@ module.exports.fetchMyReservations = (event, context, callback) => {
 
 var getSample = () => {
   var randomIndex = ~~(Math.random() * fake.length);
-  return fake.slice(randomIndex, randomIndex + (~~(Math.random() * 5)+1)).sort((a,b) => a.startTime - b.startTime);
+  return fake.slice(randomIndex, randomIndex + (~~(Math.random() * 3)+3)).sort((a,b) => a.startTime - b.startTime);
 }
 
 
@@ -238,9 +238,11 @@ module.exports.itinerary = (event, context, callback) => {
   items.forEach((item, index, arr) => {
     itinerary.push(item);
     if (index !== arr.length -1) {
+      const random = Math.random() > .25;
       var travel = {
-        name: Math.random() > .25 ? 'Travel' : 'Train',
-        img: 'http://stashflaticons.com/images/car-flat-icons.svg',
+        name: random ? 'Travel' : 'Train',
+        icon: random ? 'walking' : 'car',
+        img: 'https://source.unsplash.com/random',
         startTime: item.endTime,
         endTime: arr[index + 1].startTime
       }
@@ -255,6 +257,5 @@ module.exports.lyft = (event, context, callback) => {
   callback(null, {statusCode: 201, body: "LYFT OK "});
 }
 // module.exports.listings({}, null, console.log);
-
 
 

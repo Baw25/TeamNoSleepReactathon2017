@@ -17,12 +17,6 @@ import DateNightToolbar from './DateNightToolbar';
 import ItineraryItem from './ItineraryItem';
 import ItineraryTitle from './ItineraryTitle';
 
-const icons = [
-  'bench',
-  'dish',
-  'fireworks',
-  'walking',
-];
 
 class android extends Component {
   constructor(props) {
@@ -37,11 +31,7 @@ class android extends Component {
     fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
       .then(response => response.json())
       .then(itineraries => {
-        this.setState({ items: itineraries.map((item, index) => {
-          return Object.assign({
-            icon: icons[index % icons.length],
-          }, item);
-        }) });
+        this.setState({ items: itineraries });
       });
   }
 

@@ -5,7 +5,6 @@ var fs = require('fs');
 const icons = [
   'bench',
   'calendar',
-  'car',
   'coffee',
   'dish',
   'fireworks',
@@ -16,7 +15,6 @@ const icons = [
   'park',
   'table',
   'tickets',
-  'walking',
 ];
 
 const randomIcon = () => icons[Math.floor(Math.random() * icons.length)];
