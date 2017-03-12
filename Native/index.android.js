@@ -10,10 +10,13 @@ import {
   StyleSheet,
   ScrollView,
   Text,
+  View,
 } from 'react-native';
 
+import DateNightToolbar from './DateNightToolbar';
 import ItineraryItem from './ItineraryItem';
 import ItineraryTitle from './ItineraryTitle';
+
 
 class android extends Component {
   constructor(props) {
@@ -27,20 +30,20 @@ class android extends Component {
   componentDidMount() {
     fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
       .then(response => response.json())
-      .then(itineraries => {
-        this.setState({ items: itineraries });
+      .then(itinerary => {
+        this.setState({ items: itinerary.schedule });
       });
   }
 
   render() {
     const { items } = this.state;
     return (
-      <ScrollView
-        ref={(scrollView) => {this._sv = scrollView}}
-        style={styles.fullpage}
-      >
-        {items.map(this._boundItem)}
-      </ScrollView>
+      <View style={styles.page}>
+        <DateNightToolbar />
+        <ScrollView style={styles.scrollview}>
+          {items.map(this._boundItem)}
+        </ScrollView>
+      </View>
     );
   }
 
@@ -55,16 +58,21 @@ class android extends Component {
 }
 
 const styles = StyleSheet.create({
-  fullpage: {
-    backgroundColor: '#dddddd',
+  page: {
+    flexGrow: 1,
+    flexBasis: '100%',
+  },
+  scrollview: {
+    backgroundColor: '#dfdfdf',
     flexGrow: 1,
     flexShrink: 0,
-    flexBasis: '100%'
+  },
+  toolbar: {
+    flexGrow: 0,
+    flexShrink: 0,
   },
 });
 
 AppRegistry.registerComponent('android', () => android);
-AppRegistry.registerComponent('ItineraryItem', () => ItineraryItem);
-AppRegistry.registerComponent('ItineraryTitle', () => ItineraryTitle);
 
 export default android;

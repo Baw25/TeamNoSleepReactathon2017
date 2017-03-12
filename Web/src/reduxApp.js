@@ -6,7 +6,7 @@ import actionCreators from './actions/index';
 function mapStateToProps(state) {
   return {
     userLocation: state.userLocation,
-    openTableList: state.openTableList
+    openTableList: state.openTableList,
   }
 }
 

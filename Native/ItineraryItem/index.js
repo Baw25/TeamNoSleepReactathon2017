@@ -17,17 +17,13 @@ const contentHeight = 200;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#efefef',
-    borderRadius: 5,
-    margin: 10,
-    paddingBottom: 5,
-  },
-  title: {
-    color : '#2a2f43',
-  },
-  titleContainer: {
-    flex : 1,
-    padding: 10,
+    backgroundColor: '#eeeeee',
+    borderRadius: 4,
+    elevation: 4,
+    marginTop: 16,
+    marginLeft: 16,
+    marginRight: 16,
+    marginBottom: 16,
   },
 });
 
@@ -46,23 +42,34 @@ class ItineraryItem extends Component {
   render() {
     const {
       animation,
+      expanded,
     } = this.state;
 
     const {
+      desc,
       endTime,
       name,
       startTime,
+      icon,
       img,
     } = this.props;
 
-    return (
-      <View style={styles.container}>
+    const titleProps = {
+      desc,
+      icon,
+      startTime,
+      name,
+    };
 
+    return (
+      <View
+        style={[
+          styles.container,
+          { paddingBottom: expanded ? 16 : 0 }
+        ]}
+      >
         <TouchableOpacity onPress={this._boundToggle}>
-          <ItineraryTitle
-            time={startTime}
-            title={name}
-          />
+          <ItineraryTitle {...titleProps} />
         </TouchableOpacity>
 
         <Animated.Image

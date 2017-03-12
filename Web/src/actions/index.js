@@ -1,4 +1,4 @@
-import * as serverlessActions from './serverlessActions.js';
+import serverlessActions from './serverlessActions.js';
 
 const actionCreators = Object.assign({},
   serverlessActions
