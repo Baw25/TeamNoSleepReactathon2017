@@ -34,3 +34,11 @@ functions:
           method: get
           path: availability
           cors: true
+  itinerary:
+    handler: handler.itinerary
+    events:
+      - http:
+          method: get
+          path: itinerary
+          cors: true
+          

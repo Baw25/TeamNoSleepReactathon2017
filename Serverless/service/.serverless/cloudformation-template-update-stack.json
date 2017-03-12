@@ -29,6 +29,12 @@
         "LogGroupName": "/aws/lambda/service-dev-availability"
       }
     },
+    "ItineraryLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/service-dev-itinerary"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -90,6 +96,12 @@
                     {
                       "Fn::GetAtt": [
                         "AvailabilityLogGroup",
+                        "Arn"
+                      ]
+                    },
+                    {
+                      "Fn::GetAtt": [
+                        "ItineraryLogGroup",
                         "Arn"
                       ]
                     }
@@ -156,6 +168,20 @@
                           "*"
                         ]
                       ]
+                    },
+                    {
+                      "Fn::Join": [
+                        ":",
+                        [
+                          {
+                            "Fn::GetAtt": [
+                              "ItineraryLogGroup",
+                              "Arn"
+                            ]
+                          },
+                          "*"
+                        ]
+                      ]
                     }
                   ]
                 }
@@ -184,7 +210,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/service/dev/1489274299115-2017-03-11T23:18:19.115Z/service.zip"
+          "S3Key": "serverless/service/dev/1489282637755-2017-03-12T01:37:17.755Z/service.zip"
         },
         "FunctionName": "service-dev-listings",
         "Handler": "handler.listings",
@@ -202,14 +228,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "ListingsLambdaVersion3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw": {
+    "ListingsLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ListingsLambdaFunction"
         },
-        "CodeSha256": "3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw="
+        "CodeSha256": "5WB3aSlDJE8ySrV1CF/BNW+iO6/lblSK1Jq4KGjJ+zU="
       }
     },
     "ReserveLambdaFunction": {
@@ -219,7 +245,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/service/dev/1489274299115-2017-03-11T23:18:19.115Z/service.zip"
+          "S3Key": "serverless/service/dev/1489282637755-2017-03-12T01:37:17.755Z/service.zip"
         },
         "FunctionName": "service-dev-reserve",
         "Handler": "handler.reserve",
@@ -237,14 +263,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "ReserveLambdaVersion3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw": {
+    "ReserveLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ReserveLambdaFunction"
         },
-        "CodeSha256": "3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw="
+        "CodeSha256": "5WB3aSlDJE8ySrV1CF/BNW+iO6/lblSK1Jq4KGjJ+zU="
       }
     },
     "ProvisionLambdaFunction": {
@@ -254,7 +280,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/service/dev/1489274299115-2017-03-11T23:18:19.115Z/service.zip"
+          "S3Key": "serverless/service/dev/1489282637755-2017-03-12T01:37:17.755Z/service.zip"
         },
         "FunctionName": "service-dev-provision",
         "Handler": "handler.provision",
@@ -272,14 +298,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "ProvisionLambdaVersion3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw": {
+    "ProvisionLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ProvisionLambdaFunction"
         },
-        "CodeSha256": "3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw="
+        "CodeSha256": "5WB3aSlDJE8ySrV1CF/BNW+iO6/lblSK1Jq4KGjJ+zU="
       }
     },
     "AvailabilityLambdaFunction": {
@@ -289,7 +315,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/service/dev/1489274299115-2017-03-11T23:18:19.115Z/service.zip"
+          "S3Key": "serverless/service/dev/1489282637755-2017-03-12T01:37:17.755Z/service.zip"
         },
         "FunctionName": "service-dev-availability",
         "Handler": "handler.availability",
@@ -307,14 +333,49 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AvailabilityLambdaVersion3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw": {
+    "AvailabilityLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AvailabilityLambdaFunction"
         },
-        "CodeSha256": "3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw="
+        "CodeSha256": "5WB3aSlDJE8ySrV1CF/BNW+iO6/lblSK1Jq4KGjJ+zU="
+      }
+    },
+    "ItineraryLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/service/dev/1489282637755-2017-03-12T01:37:17.755Z/service.zip"
+        },
+        "FunctionName": "service-dev-itinerary",
+        "Handler": "handler.itinerary",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs4.3",
+        "Timeout": 6
+      },
+      "DependsOn": [
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "ItineraryLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "ItineraryLambdaFunction"
+        },
+        "CodeSha256": "5WB3aSlDJE8ySrV1CF/BNW+iO6/lblSK1Jq4KGjJ+zU="
       }
     },
     "ApiGatewayRestApi": {
@@ -378,6 +439,21 @@
           ]
         },
         "PathPart": "availability",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceItinerary": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "itinerary",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -567,6 +643,52 @@
         }
       }
     },
+    "ApiGatewayMethodItineraryOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceItinerary"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
     "ApiGatewayMethodListingsGet": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -719,7 +841,45 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1489274299149": {
+    "ApiGatewayMethodItineraryGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceItinerary"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "ItineraryLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1489282637785": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -731,7 +891,8 @@
         "ApiGatewayMethodListingsGet",
         "ApiGatewayMethodReservePost",
         "ApiGatewayMethodProvisionPost",
-        "ApiGatewayMethodAvailabilityGet"
+        "ApiGatewayMethodAvailabilityGet",
+        "ApiGatewayMethodItineraryGet"
       ]
     },
     "ListingsLambdaPermissionApiGateway": {
@@ -865,6 +1026,39 @@
           ]
         }
       }
+    },
+    "ItineraryLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "ItineraryLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:aws:execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -876,25 +1070,31 @@
     "ListingsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ListingsLambdaVersion3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw"
+        "Ref": "ListingsLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU"
       }
     },
     "ReserveLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ReserveLambdaVersion3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw"
+        "Ref": "ReserveLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU"
       }
     },
     "ProvisionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ProvisionLambdaVersion3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw"
+        "Ref": "ProvisionLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU"
       }
     },
     "AvailabilityLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AvailabilityLambdaVersion3A8vqTwB28MS0zcdfDFZzEvGeJcz8wUhd30zOHuEsnw"
+        "Ref": "AvailabilityLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU"
+      }
+    },
+    "ItineraryLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "ItineraryLambdaVersion5WB3aSlDJE8ySrV1CFBNWiO6lblSK1Jq4KGjJzU"
       }
     },
     "ServiceEndpoint": {
