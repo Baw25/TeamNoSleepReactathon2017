@@ -30,8 +30,8 @@ class android extends Component {
   componentDidMount() {
     fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
       .then(response => response.json())
-      .then(itineraries => {
-        this.setState({ items: itineraries });
+      .then(itinerary => {
+        this.setState({ items: itinerary.schedule });
       });
   }
 

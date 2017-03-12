@@ -228,28 +228,29 @@ var getSample = () => {
   return fake.slice(randomIndex, randomIndex + (~~(Math.random() * 3)+3)).sort((a,b) => a.startTime - b.startTime);
 }
 
+var fakeItinerary = JSON.parse(fs.readFileSync('./fakeItinerary.json'));
 
 module.exports.itinerary = (event, context, callback) => {
-  var items = getSample();
-  items = items.sort((a,b) => {
-    a.startTime - b.startTime;
-  });
-  var itinerary = [];
-  items.forEach((item, index, arr) => {
-    itinerary.push(item);
-    if (index !== arr.length -1) {
-      const random = Math.random() > .25;
-      var travel = {
-        name: random ? 'Travel' : 'Train',
-        icon: random ? 'walking' : 'car',
-        img: 'https://source.unsplash.com/random',
-        startTime: item.endTime,
-        endTime: arr[index + 1].startTime
-      }
-      itinerary.push(travel);
-    }
-  });
-  callback(null, {statusCode: 200, body: JSON.stringify(itinerary)});
+  // var items = getSample();
+  // items = items.sort((a,b) => {
+  //   a.startTime - b.startTime;
+  // });
+  // var itinerary = [];
+  // items.forEach((item, index, arr) => {
+  //   itinerary.push(item);
+  //   if (index !== arr.length -1) {
+  //     const random = Math.random() > .25;
+  //     var travel = {
+  //       name: random ? 'Travel' : 'Train',
+  //       icon: random ? 'walking' : 'car',
+  //       img: 'https://source.unsplash.com/random',
+  //       startTime: item.endTime,
+  //       endTime: arr[index + 1].startTime
+  //     }
+  //     itinerary.push(travel);
+  //   }
+  // });
+  callback(null, {statusCode: 200, body: JSON.stringify(fakeItinerary)});
 }
 
 

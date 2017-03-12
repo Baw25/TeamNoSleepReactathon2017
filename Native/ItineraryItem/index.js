@@ -46,12 +46,20 @@ class ItineraryItem extends Component {
     } = this.state;
 
     const {
+      desc,
       endTime,
       name,
       startTime,
       icon,
       img,
     } = this.props;
+
+    const titleProps = {
+      desc,
+      icon,
+      startTime,
+      name,
+    };
 
     return (
       <View
@@ -61,11 +69,7 @@ class ItineraryItem extends Component {
         ]}
       >
         <TouchableOpacity onPress={this._boundToggle}>
-          <ItineraryTitle
-            icon={icon}
-            time={startTime}
-            title={name}
-          />
+          <ItineraryTitle {...titleProps} />
         </TouchableOpacity>
 
         <Animated.Image

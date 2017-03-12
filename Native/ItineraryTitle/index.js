@@ -66,16 +66,18 @@ const icons = {
 class ItineraryTitle extends Component {
   constructor(props) {
     super(props);
+    console.log(props.startTime);
   }
 
   render() {
     const {
+      desc,
       icon,
-      title,
-      time,
+      name,
+      startTime,
     } = this.props;
 
-    const date = new Date(time);
+    const date = new Date(startTime * 1000);
     const dateString = moment(date).format('h:mm A');
 
     return (
@@ -87,8 +89,8 @@ class ItineraryTitle extends Component {
             style={styles.image}
           />
           <View style={styles.textContainer}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.description}>Julian give me desc</Text>
+            <Text style={styles.title}>{name}</Text>
+            <Text style={styles.description}>{desc}</Text>
           </View>
         </View>
       </View>
