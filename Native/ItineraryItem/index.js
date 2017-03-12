@@ -4,6 +4,7 @@ import React, {
 
 import {
   Animated,
+  Image,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -20,6 +21,9 @@ const styles = StyleSheet.create({
   },
   body: {
     marginTop: 10,
+  },
+  image: {
+    height: 200,
   },
   title: {
     color : '#2a2f43',
@@ -46,8 +50,10 @@ class ItineraryItem extends Component {
     } = this.state;
 
     const {
-      children,
+      endTime,
       title,
+      startTime,
+      url,
     } = this.props;
 
     return (
@@ -62,7 +68,10 @@ class ItineraryItem extends Component {
               style={styles.body}
               onLayout={this._boundExpanded}
             >
-              {children}
+              <Image
+                source={{ uri: url }}
+                style={styles.image}
+              />
             </View>
           </Animated.View>
         </View>

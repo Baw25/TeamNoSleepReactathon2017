@@ -7,7 +7,6 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  Image,
   StyleSheet,
   ScrollView,
   Text,
@@ -16,19 +15,29 @@ import {
 import ItineraryItem from './ItineraryItem';
 
 class android extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      items: [
+        { title: 'Hello this is title', url: 'http://placehold.it/300x200' }
+      ]
+    };
+
+    this._boundItem = this._renderItem.bind(this);
+  }
 
   render() {
+    const { items } = this.state;
     return (
       <ScrollView style={styles.fullpage}>
-        <ItineraryItem title="Hi">
-          <Image
-            source={{ uri: 'http://placehold.it/300x200' }}
-            style={styles.image}
-          />
-          <Text>Hello everyone</Text>
-        </ItineraryItem>
+        {items.map(this._boundItem)}
       </ScrollView>
     );
+  }
+
+  _renderItem(item, index) {
+    return (<ItineraryItem key={index} {...item} />);
   }
 }
 
@@ -38,9 +47,6 @@ const styles = StyleSheet.create({
     flexShrink: 0,
     flexBasis: '100%'
   },
-  image: {
-    height: 200,
-  }
 });
 
 AppRegistry.registerComponent('android', () => android);
