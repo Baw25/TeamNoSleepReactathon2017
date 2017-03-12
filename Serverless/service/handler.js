@@ -7,7 +7,10 @@ var qs = require('querystring');
 var token;
 var fake = JSON.parse(fs.readFileSync('./fake.json'));
 var gFetch = require('graphql-fetch')('https://www.opentable.com/graphql');
-
+// var reactDom = require('react-dom');
+// var React = require('react');
+// console.log(reactDom);
+// reactDom.render(React.createElement('div'), {}, console.log);
 try {
   token = JSON.parse(fs.readFileSync('./accessToken.json'));
   axios.defaults.headers.authorization = "Bearer " + token.access_token;
@@ -31,7 +34,7 @@ var oneDay = dayToMS(1);
 var constructResponse = (response) => ({statusCode: response.status, body: JSON.stringify(response.data)});
 var constructFromUTC = (epoch) => {
   var date = new Date(epoch);
-  return date.getYear() + 1900 + '-' + leftPad(date.getMonth(), 2, 0) + '-' + leftPad(date.getDay()+1, 2, 0) + 'T' + leftPad(date.getHours(), 2, 0) + ':' + leftPad(date.getMinutes(), 2, 0);
+  return date.getYear() + 1900 + '-' + leftPad(date.getMonth()+1, 2, 0) + '-' + leftPad(date.getDay()+1, 2, 0) + 'T' + leftPad(date.getHours(), 2, 0) + ':' + leftPad(date.getMinutes(), 2, 0);
 }
 var findMissing = function(obj, props) {
   var missing = [];
@@ -55,39 +58,7 @@ module.exports.listings = (event, context, callback) => {
 };
 
 
-var requiredReserveParams = ['firstName', 'emailAddress', 'lastName', 'reservationToken', 'restaurantId']
-var constructReserveParameterError = () => new Error(`Body with ${requiredReserveParams} are required for reservations`);
-module.exports.reserve = (event, context, callback) => {
-  var vars = event;
-  if (typeof vars === 'string') {
-    try {
-      vars = JSON.parse(vars);
-    } catch (e) {
-      return callback(constructReserveParameterError());
-    }
-  } else if (vars === undefined || vars === null) {
-    return callback(constructReserveParameterError());
-  }
-  if(!ensureProps(vars, requiredReserveParams)) {
-    return callback(new Error(`Missing Parameters: ${findMissing(vars, requiredReserveParams)}`))
-  }
-  axios.post("https://platform.otqa.com/booking/reservations", {
-    first_name: event.firstName,
-    email_address: event.emailAddress,
-    last_name: event.lastName,
-    reservation_token: event.reservationToken,
-    restaurant_id: event.restaurantId,
-    is_third_party: true
-  })
-  .then(response => {
-    var customResponse = constructResponse(response)
-    callback(null, customResponse);
-    console.log(response);
-  })
-  .catch(error => {
-    callback(error);
-  });
-}
+var availableIds = [334879, 334882, 334885, 334888, 334891, 334894, 334897, 334900, 334903];
 
 
 
@@ -101,44 +72,12 @@ axios.post('SERVERLESS URL', {
 }).then(()=>{}).catch(()=>{});
 
 */
-var requiredProvisionParams = ['partySize', 'dateTime', 'restaurantId'];
-var constructProvisionParameterError = () => new Error(`Body with ${requiredProvisionParams} is required for provisioning a token`);
-module.exports.provision = (event, context, callback) => {
-  var vars = event;
-  if (typeof vars === 'string') {
-    try {
-      vars = JSON.parse(vars);
-    } catch (e) {
-      return callback(constructProvisionParameterError());
-    }
-  } else if (vars === undefined || vars === null) {
-    return callback(constructProvisionParameterError());
-  }
-  if (!ensureProps(vars, requiredProvisionParams)) {
-    return callback(new Error(`Missing Parameters: ${findMissing(vars, requiredProvisionParams)}`));
-  }
-  axios.post("https://platform.otqa.com/booking/slot_locks", {
-    party_size: vars.partySize,
-    date_time: vars.dateTime,
-    restaurant_id: vars.restaurantId
-  })
-  .then(response => {
-    var customResponse = constructResponse(response);
-    callback(null, customResponse);
-  })
-  .catch(error => {
-    callback(error);
-  });
-};
-
-
-// module.exports.provision({partySize: 3, dateTime: constructFromUTC(Date.now()+389120302343984), restaurantId: 440}, null, console.log);
-// module.exports.reserve({firstName: 'me', emailAddress: 'g@gmail.com', lastName: 'hi', reservationToken: '123', restaurantId: 440}, null, console.log);
-
-var requiredAvailabilityParams = ["restaurantId", "startDateTime", "partySize"]
+var requiredAvailabilityParams = [] || ["restaurantId", "startDateTime", "partySize"]
 var constructAvailibilityParameterError = () => new Error(`Body with ${requiredAvailabilityParams} is required for checking availability`);
 module.exports.availability = (event, context, callback) => {
-  var vars = event;
+  var vars = event || {};
+  vars.startDateTime = constructFromUTC(Date.now() + 9000000000);
+  vars.partySize = 2;
   if (typeof vars === 'string') {
     try {
       vars = JSON.parse(vars);
@@ -151,6 +90,9 @@ module.exports.availability = (event, context, callback) => {
   if (!ensureProps(vars, requiredAvailabilityParams)) {
     return callback(new Error(`Missing Parameters: ${findMissing(vars, requiredAvailabilityParams)}`));
   }
+  //region otqa ids
+  vars.restaurantId = availableIds[~~(Math.random() * availableIds.length)];
+  //endregion otqa ids
   axios.get(`https://platform.otqa.com/availability/${vars.restaurantId}?`+ qs.stringify({
     start_date_time: vars.startDateTime,
     party_size: vars.partySize,
@@ -163,6 +105,121 @@ module.exports.availability = (event, context, callback) => {
   })
   .catch(callback);
 };
+
+// module.exports.availability(null, null, (e, r) => {
+//   if (e) {
+//     console.log(e.response.data);
+//   } else {
+//     console.log(JSON.parse(r.body));
+//   }
+// });
+
+var requiredProvisionParams = ['partySize', 'dateTime', 'restaurantId'];
+var constructProvisionParameterError = () => new Error(`Body with ${requiredProvisionParams} is required for provisioning a token`);
+module.exports.provision = (event, context, callback) => {
+  module.exports.availability(event, context, (error, response) => {
+    if (error) return callback(error);
+    var vars = event || {};
+    var resp = JSON.parse(response.body);
+    vars.restaurantId = resp.rid;
+    vars.partySize = resp.party_size;
+    vars.dateTime = resp.times[~~(Math.random() * resp.times.length)];
+    if (typeof vars === 'string') {
+      try {
+        vars = JSON.parse(vars);
+      } catch (e) {
+        return callback(constructProvisionParameterError());
+      }
+    } else if (vars === undefined || vars === null) {
+      return callback(constructProvisionParameterError());
+    }
+    if (!ensureProps(vars, requiredProvisionParams)) {
+      return callback(new Error(`Missing Parameters: ${findMissing(vars, requiredProvisionParams)}`));
+    }
+    axios.post("https://platform.otqa.com/booking/slot_locks", {
+      party_size: vars.partySize,
+      date_time: vars.dateTime,
+      restaurant_id: vars.restaurantId
+    })
+    .then(response => {
+      response.data.restaurant_id = vars.restaurantId
+      var customResponse = constructResponse(response);
+      callback(null, customResponse);
+    })
+    .catch(error => {
+      callback(error);
+    });
+  });
+};
+
+var requiredReserveParams = ['firstName', 'emailAddress', 'lastName', 'reservationToken', 'restaurantId']
+var constructReserveParameterError = () => new Error(`Body with ${requiredReserveParams} are required for reservations`);
+module.exports.reserve = (event, context, callback) => {
+  module.exports.provision(event, context, (error, response) => {
+    if (error) return callback(error);
+    var vars = event || {};
+    vars.firstName = vars.firstName || 'react';
+    vars.lastName = vars.lastName || 'athon';
+    vars.emailAddress = 'faker@fake.com';
+    vars.phone = {
+      number: "8008880000",
+      country_code: "UK",
+      phone_type: "Mobile",
+      extension: "124"
+    };
+    var resp = JSON.parse(response.body);
+    vars.reservationToken = resp.reservation_token;
+    vars.restaurantId = resp.restaurant_id;
+    if (typeof vars === 'string') {
+      try {
+        vars = JSON.parse(vars);
+      } catch (e) {
+        return callback(constructReserveParameterError());
+      }
+    } else if (vars === undefined || vars === null) {
+      return callback(constructReserveParameterError());
+    }
+    if(!ensureProps(vars, requiredReserveParams)) {
+      return callback(new Error(`Missing Parameters: ${findMissing(vars, requiredReserveParams)}`))
+    }
+    axios.post("https://platform.otqa.com/booking/reservations", {
+      first_name: vars.firstName,
+      email_address: vars.emailAddress,
+      last_name: vars.lastName,
+      reservation_token: vars.reservationToken,
+      phone: vars.phone,
+      restaurant_id: vars.restaurantId,
+      is_third_party: true,
+      diner_info: {
+      first_name: "John",
+      last_name: "Smith",
+      phone: {
+          phone_type: "Mobile",
+          country_code: "US",
+          number: "8285552233",
+          extension: "124"
+      }
+  }
+    })
+    .then(response => {
+      var customResponse = constructResponse(response)
+      callback(null, customResponse);
+      console.log(response);
+    })
+    .catch(error => {
+      callback(error);
+    });
+  });
+}
+// module.exports.reserve(null, null, (e, r) => {
+//   if (e) {
+//     console.log(e.response.data);
+//   }
+// });
+
+// module.exports.provision({partySize: 3, dateTime: constructFromUTC(Date.now()+389120302343984), restaurantId: 440}, null, console.log);
+// module.exports.reserve({firstName: 'me', emailAddress: 'g@gmail.com', lastName: 'hi', reservationToken: '123', restaurantId: 440}, null, console.log);
+
 
 module.exports.locationAvailability = (event, context, callback) => {
   var vars = event;
@@ -188,6 +245,7 @@ module.exports.locationAvailability = (event, context, callback) => {
 //     console.log(e.response.data);
 //   }
 // });
+
 
 
 module.exports.fetchEveningDates = (event, context, callback) => {
