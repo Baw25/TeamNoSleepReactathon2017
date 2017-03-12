@@ -1,0 +1,57 @@
+.header {
+  width: 100%;
+  height: 70px;
+  background-color: #374249;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-location-item {
+  background-color: #FF5645;
+  min-width: 250px;
+  display: flex;
+  justify-content: center
+}
+
+.header-location-item input {
+  background-color: #FF5645;
+  border: none;
+  color: white;
+  font-size: 15px
+}
+
+.header-location-item input::placeholder {
+  color: white;
+  opacity: 0.8;
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+.header-locationitem input[type=text]:focus {
+  outline: none;
+  box-shadow: -8px 10px 0px -7px #4EA6EA, 8px 10px 0px -7px #4EA6EA;
+}
+
+.header-subsection {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: center;
+  color: white;
+}
+
+.header-subsection a {
+  padding: 0 40px;
+  font-size: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.highlighted {
+  color: #FF5645;
+}
