@@ -12,18 +12,21 @@ import {
 } from 'react-native';
 
 import ItineraryTitle from '../ItineraryTitle';
+import ItinerarySidebar from '../ItinerarySidebar';
 
 const contentHeight = 200;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#eeeeee',
+  card: {
+    backgroundColor: '#ffffff',
     borderRadius: 4,
     elevation: 4,
-    marginTop: 16,
+    flexGrow: 1,
+    margin: 16,
+  },
+  container: {
+    flexDirection: 'row',
     marginLeft: 16,
-    marginRight: 16,
-    marginBottom: 16,
   },
 });
 
@@ -48,34 +51,35 @@ class ItineraryItem extends Component {
     const {
       desc,
       endTime,
+      icon,
       name,
       startTime,
-      icon,
       img,
     } = this.props;
 
-    const titleProps = {
-      desc,
+    const sidebarProps = {
       icon,
       startTime,
+    };
+
+    const titleProps = {
+      desc,
       name,
     };
 
     return (
-      <View
-        style={[
-          styles.container,
-          { paddingBottom: expanded ? 16 : 0 }
-        ]}
-      >
-        <TouchableOpacity onPress={this._boundToggle}>
-          <ItineraryTitle {...titleProps} />
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <ItinerarySidebar {...sidebarProps} />
+        <View style={styles.card}>
+          <TouchableOpacity onPress={this._boundToggle}>
+            <ItineraryTitle {...titleProps} />
+          </TouchableOpacity>
 
-        <Animated.Image
-          style={{ height: animation }}
-          source={{ uri: img }}
-        />
+          <Animated.Image
+            style={{ height: animation, marginBottom: expanded ? 16 : 0 }}
+            source={{ uri: img }}
+          />
+        </View>
       </View>
     );
   }

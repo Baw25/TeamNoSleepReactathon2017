@@ -28,7 +28,7 @@ class android extends Component {
   }
 
   componentDidMount() {
-    fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
+    fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/ritinerary')
       .then(response => response.json())
       .then(itinerary => {
         this.setState({ itinerary });
