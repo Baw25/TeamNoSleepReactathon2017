@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import ItineraryItem from './ItineraryItem';
+import ItineraryTitle from './ItineraryTitle';
 
 class android extends Component {
   constructor(props) {
@@ -47,6 +48,7 @@ class android extends Component {
 
 const styles = StyleSheet.create({
   fullpage: {
+    backgroundColor: '#dddddd',
     flexGrow: 1,
     flexShrink: 0,
     flexBasis: '100%'
@@ -55,5 +57,6 @@ const styles = StyleSheet.create({
 
 AppRegistry.registerComponent('android', () => android);
 AppRegistry.registerComponent('ItineraryItem', () => ItineraryItem);
+AppRegistry.registerComponent('ItineraryTitle', () => ItineraryTitle);
 
 export default android;

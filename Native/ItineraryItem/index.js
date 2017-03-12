@@ -7,14 +7,17 @@ import {
   Image,
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
+import ItineraryTitle from '../ItineraryTitle';
+
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#efefef',
+    borderRadius: 5,
     margin: 10,
-    backgroundColor: '#eeeeee',
   },
   body: {
     marginBottom: 10,
@@ -59,11 +62,12 @@ class ItineraryItem extends Component {
     return (
       <View style={styles.container}>
 
-        <TouchableWithoutFeedback onPress={this._boundToggle} >
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{name}</Text>
-          </View>
-        </TouchableWithoutFeedback>
+        <TouchableOpacity onPress={this._boundToggle}>
+          <ItineraryTitle
+            time={startTime}
+            title={name}
+          />
+        </TouchableOpacity>
 
         <Animated.View
           style={{ height: animation }}
