@@ -28,7 +28,7 @@ class android extends Component {
   }
 
   componentDidMount() {
-    fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
+    fetch('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/ritinerary')
       .then(response => response.json())
       .then(itinerary => {
         this.setState({ itinerary });
@@ -51,10 +51,12 @@ class android extends Component {
     );
   }
 
-  _renderItem(item, index) {
+  _renderItem(item, index, items) {
     return (
       <ItineraryItem
         key={index}
+        top={index > 0}
+        bottom={index < items.length - 1}
         {...item}
       />
     );

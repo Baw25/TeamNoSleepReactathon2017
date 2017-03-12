@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import React, {
   Component,
 } from 'react';
@@ -12,18 +14,32 @@ import {
 } from 'react-native';
 
 import ItineraryTitle from '../ItineraryTitle';
+import ItinerarySidebar from '../ItinerarySidebar';
 
 const contentHeight = 200;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#eeeeee',
+  card: {
+    backgroundColor: '#ffffff',
     borderRadius: 4,
     elevation: 4,
-    marginTop: 16,
+    flexGrow: 1,
+    margin: 16,
+  },
+  container: {
+    flexDirection: 'row',
     marginLeft: 16,
-    marginRight: 16,
-    marginBottom: 16,
+  },
+  time: {
+    color: '#666666',
+    fontSize: 12,
+  },
+  timeContainer: {
+    alignItems: 'flex-end',
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 28,
+    width: 56,
   },
 });
 
@@ -46,36 +62,46 @@ class ItineraryItem extends Component {
     } = this.state;
 
     const {
+      bottom,
       desc,
       endTime,
-      name,
-      startTime,
       icon,
       img,
+      name,
+      startTime,
+      top,
     } = this.props;
+
+    const sidebarProps = {
+      bottom,
+      icon,
+      top,
+    };
 
     const titleProps = {
       desc,
-      icon,
-      startTime,
       name,
     };
 
-    return (
-      <View
-        style={[
-          styles.container,
-          { paddingBottom: expanded ? 16 : 0 }
-        ]}
-      >
-        <TouchableOpacity onPress={this._boundToggle}>
-          <ItineraryTitle {...titleProps} />
-        </TouchableOpacity>
+    const time = new Date(startTime * 1000);
+    const timeString = moment(time).format('h:mm A');
 
-        <Animated.Image
-          style={{ height: animation }}
-          source={{ uri: img }}
-        />
+    return (
+      <View style={styles.container}>
+        <View style={styles.timeContainer}>
+          <Text style={styles.time}>{timeString}</Text>
+        </View>
+        <ItinerarySidebar {...sidebarProps} />
+        <View style={styles.card}>
+          <TouchableOpacity onPress={this._boundToggle}>
+            <ItineraryTitle {...titleProps} />
+          </TouchableOpacity>
+
+          <Animated.Image
+            style={{ height: animation, marginBottom: expanded ? 16 : 0 }}
+            source={{ uri: img }}
+          />
+        </View>
       </View>
     );
   }
