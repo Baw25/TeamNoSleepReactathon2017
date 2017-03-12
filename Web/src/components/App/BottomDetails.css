@@ -1,0 +1,116 @@
+.OrderBackground {
+  background-color: #F0F5F9;
+  padding-bottom: 100px;
+}
+
+.OrderContainers {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 1000px;
+  background-color: #F0F5F9;
+}
+
+/*#FF5747*/
+.orders {
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 100px;
+  padding-left: 0px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.orders:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+.OrderItem1 {
+  background-image: url("../../assets/img1.jpg");
+  width: 200px;
+  height: 150px;
+  border-radius: 5px;
+
+}
+
+.OrderItem2 {
+  background-image: url("../../assets/img2.jpg");
+  width: 200px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.OrderItem3 {
+  background-image: url("../../assets/img3.jpg");
+  width: 200px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.OrderItem4 {
+  background-image: url("../../assets/img4.jpg");
+  width: 200px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+/*.OrderItem5 {
+  background-image: url("../../assets/img5.jpg");
+  width: 150px;
+  height: 100px;
+}*/
+
+/*.OrderItem6 {
+  background-image: url("../../assets/img6.jpg");
+  width: 200px;
+  height: 200px;
+}
+*/
+.pic-descriptions {
+  padding-top:0px;
+  margin-left:0px;
+  color:#FF5747;
+}
+
+.food-type {
+  font-size: 12px;
+}
+
+.book-type {
+  font-size: 12px;
+  color:#9d9d9d;
+}
+
+
+/*.pic-div {
+  display: inline-block;
+}*/
+
+/*.pic-descriptions-invent {
+  background-image: url("../../assets/rsz_operations.png"); 
+  display: inline-block;
+  width:27px;
+  height:29px;
+  padding-left: 3px;
+  padding-right:2px;
+}
+
+.pic-descriptions-price {
+  background-image: url("../public/coin-us-dollar-icon2.png"); 
+  display: inline-block;
+  width:24px;
+  height:24px;
+  padding-left: 0.2px;
+  padding-bottom:0.5px;
+
+}
+
+.pic-descriptions-arrow {
+  background-image: url("../public/up_alt.png"); 
+  display: inline-block;
+  width:32px;
+  height:30px;
+}*/
+
