@@ -122,7 +122,7 @@
   margin-top: 10%;
   color: #ffffff;
   font-size:20px;
-  font-family: 'Snell Roundhand, cursive';
+  font-family: 'Giddyup std';
 }
 
 @keyframes sdb04 {
@@ -137,4 +137,12 @@
   }
 }
 
+.filter-header {
+  width: 100%;
+  height: 70px;
+  background-color: #374249;
+  /*background-color: transparent;*/
+  display: flex;
+  justify-content: space-between;
+}
 

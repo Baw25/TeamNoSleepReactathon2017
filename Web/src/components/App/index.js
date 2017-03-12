@@ -40,7 +40,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    {this.props.fetchOpenTableListing()}
+    this.props.fetchOpenTableListing()
+    this.props.getItinerary()
   }
 
   scrollToTop() {
@@ -58,6 +59,7 @@ class App extends Component {
     return (
       <div className="App">
           <div className="Search">
+            {console.log(this.props)}
             <Header currentLocation="San Francisco" />
             <div className="logo">
               <img src='/src/assets/logo.png' />
