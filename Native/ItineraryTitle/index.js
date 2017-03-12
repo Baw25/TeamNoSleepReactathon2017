@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 
 import {
-  Image,
   StyleSheet,
   Text,
   View,
@@ -13,22 +12,16 @@ const styles = StyleSheet.create({
   container: {
     flex : 1,
     justifyContent: 'space-between',
-    padding: 16,
+    padding: 12,
   },
   description: {
-    color: '#666666'
-  },
-  image: {
-    height: 40,
-    marginRight: 16,
-    width: 40,
-  },
-  time: {
-    color: '#999999',
-    marginBottom: 8,
+    color : '#000000',
+    fontSize: 16,
+    marginTop: 8,
   },
   title: {
-    color : '#000000',
+    color: '#666666',
+    fontSize: 12,
   },
 });
 
@@ -41,7 +34,7 @@ class ItineraryTitle extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.title}>{name.toUpperCase()}</Text>
         <Text style={styles.description}>{desc}</Text>
       </View>
     );
