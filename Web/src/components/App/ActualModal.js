@@ -1,4 +1,9 @@
 import React, {PropTypes} from 'react';
+
+import {
+  Image
+} from 'react';
+
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 import ReactSpinner from 'react-spinjs';
 import './modal.css';
@@ -29,8 +34,8 @@ class ActualModal extends React.Component {
             {
             isLoading ? <ReactSpinner /> :
             <ModalDialog onClose={this.handleClose}>
-              <h1>Order Confirmed!</h1>
-              <p>More Content. Anything goes here</p>
+              <h1>Bookings Confirmed!</h1>
+              <p>First stop, ThirstyBear!</p>
             </ModalDialog>
           }
         </ModalContainer>
@@ -39,10 +44,12 @@ class ActualModal extends React.Component {
     );
   }
 }
+              // <Image
+              //     source={{uri:"https://brand.opentable.com/wp-content/themes/opentable/assets/images/otlogoreg.png"}} />
 // https://brand.opentable.com/wp-content/themes/opentable/assets/images/otlogoreg.png
-const styles = {
+// const styles = {
 
-}
+// }
 
 export default ActualModal;
 
