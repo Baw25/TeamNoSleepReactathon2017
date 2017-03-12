@@ -44,6 +44,7 @@ class Homepage extends Component {
         return false;
       }
     })
+    this.setState({list: filtered});
   }
 
   _onSelect(selected, name) {
