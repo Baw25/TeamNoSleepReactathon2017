@@ -1,6 +1,7 @@
 // src/components/App/index.js
 import React, { Component } from 'react';
 import Homepage from '../Homepage';
+import Header from '../Header';
 import logo from './logo.svg';
 import './style.css';
 
@@ -12,6 +13,7 @@ class App extends Component {
 
     return (
       <div className="App">
+          <Header />
           <div className="Search">
             hello
           </div>
