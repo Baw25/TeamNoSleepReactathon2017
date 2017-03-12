@@ -61,6 +61,22 @@ class FilterNavBar extends Component {
         <div className="header-location-item">
           <p className="adventure-desc">Adventure Mode:</p>
           <ToggleButton
+              colors={{
+                activeThumb: {
+                  base: 'rgb(73,255,168)',
+                },
+                inactiveThumb: {
+                  base: 'rgb(255,87,73)',
+                },
+                active: {
+                  base: 'rgb(65,66,68)',
+                  hover: 'rgb(65,66,68)',
+                },
+                inactive: {
+                  base: 'rgb(65,66,68)',
+                  hover: 'rgb(95,96,98)',
+                }
+              }}
               value={ this.state.value || false }
               onToggle={(value) => {
                 this.setState({
