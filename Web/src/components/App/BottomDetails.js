@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import StarRatingComponent from 'react-star-rating-component';
+import Card from './Card.js';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 // import Booking from "./Booking"
 import './BottomDetails.css'
@@ -18,7 +20,8 @@ class BottomDetails extends Component {
   constructor(props){
     super(props);
     this.state = {
-      rating: 4
+      rating: 4,
+      list: []
     };
   }
 
@@ -26,33 +29,31 @@ class BottomDetails extends Component {
     this.setState({rating: nextValue});
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ list: nextProps.selections.list })
+  }
+
   render(){
     const {
       options,
       vibe,
       dollars,
+      list 
     } = this.props.selections;
 
     const { rating } = this.state;
     return (
       <div className="OrderBackground">
-        <div className="OrderContainers">
-          {mapper.map((pic) => {
-            return (
-              <div>
-                <div className={`OrderItem${pic[0]} orders`}></div>
-                <strong><p className='pic-descriptions'>{pic[1]}</p></strong>
-                <StarRatingComponent 
-                    name="rate1" 
-                    starCount={5}
-                    value={rating}
-                    onStarClick={this.onStarClick.bind(this)} />
-                <p className='food-type'>{pic[2]}</p>
-                <p className='book-type'>{pic[3]}</p>
-              </div>
-            );
-          })}
-        </div>
+          <div className="OrderContainers">
+            <ReactCSSTransitionGroup
+              className="OrderContainers"
+              transitionName="example"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={300}
+            >
+              {this.state.list.length >= 1 ? this.state.list.map((rest) => <Card rest={rest} show={true}/>) : null}
+            </ReactCSSTransitionGroup>
+          </div>
       </div>
     );
   }
@@ -61,6 +62,19 @@ class BottomDetails extends Component {
 export default BottomDetails;
 
 // const styles = {
-
-
+          // {mapper.map((pic) => {
+          //   return (
+          //     <div>
+          //       <div className={`OrderItem${pic[0]} orders`}></div>
+          //       <strong><p className='pic-descriptions'>{pic[1]}</p></strong>
+          //       <StarRatingComponent 
+          //           name="rate1" 
+          //           starCount={5}
+          //           value={rating}
+          //           onStarClick={this.onStarClick.bind(this)} />
+          //       <p className='food-type'>{pic[2]}</p>
+          //       <p className='book-type'>{pic[3]}</p>
+          //     </div>
+          //   );
+          // })}
 // }

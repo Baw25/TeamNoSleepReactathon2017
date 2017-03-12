@@ -63,7 +63,7 @@ function addDateNightFilters(data) {
     if (restaurant.name === 'Thirsty Bear') {
       restaurant.options = 'American';
       restaurant.dollars = '$$$';
-      restaurant.vibe = 'chill';
+      restaurant.vibe = 'Keep it chill';
     }
   })
 
