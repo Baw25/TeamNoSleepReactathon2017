@@ -18,10 +18,12 @@
     "react-redux": "^5.0.3",
     "react-router": "^2.6.1",
     "react-router-redux": "^4.0.8",
+    "react-star-rating-component": "^1.2.4",
     "redux": "^3.6.0"
   },
   "scripts": {
     "start": "node server/index.js",
+    "start-dev": "react-scripts start",
     "start:server": "node server",
     "build": "./node_modules/react-scripts/bin/react-scripts.js build",
     "eject": "./node_modules/react-scripts/bin/react-scripts.js eject",

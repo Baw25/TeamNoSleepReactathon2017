@@ -7,47 +7,37 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  DeviceEventEmitter,
   StyleSheet,
+  ScrollView,
   Text,
-  View
 } from 'react-native';
 
-import Itinerary from './itinerary'
-
-const ITEM_CLICK_EVENT = 'ITEM_CLICK';
+import ItineraryItem from './ItineraryItem';
 
 class android extends Component {
+  constructor(props) {
+    super(props);
 
-  _handleClick(event) {
-    console.log(`${event.title}`)
-  }
+    this.state = {
+      items: [
+        { title: 'Hello this is title', url: 'http://placehold.it/300x200' }
+      ]
+    };
 
-  componentWillMount() {
-    const handleClick = (event) => {
-      console.log(event)
-    }
-
-    DeviceEventEmitter.addListener(ITEM_CLICK_EVENT, this._handleClick)
+    this._boundItem = this._renderItem.bind(this);
   }
 
   render() {
+    const { items } = this.state;
     return (
-      <View style={styles.fullpage}>
-        <Itinerary
-          style={styles.fullpage}
-          items={
-            [
-              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
-              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
-              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
-              { title: 'Test', description: 'Test description', image: 'http://placehold.it/300x200?tmp=$position' },
-            ]
-          }
-          clickHandler={ITEM_CLICK_EVENT}
-        />
-      </View>
+      <ScrollView style={styles.fullpage}>
+        {items.map(this._boundItem)}
+      </ScrollView>
     );
+  }
+
+  _renderItem(item, index) {
+    return (<ItineraryItem key={index} {...item} />);
   }
 }
 
@@ -56,9 +46,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 0,
     flexBasis: '100%'
-  }
+  },
 });
 
 AppRegistry.registerComponent('android', () => android);
+AppRegistry.registerComponent('ItineraryItem', () => ItineraryItem);
 
 export default android;
