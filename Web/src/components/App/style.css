@@ -4,15 +4,118 @@
 
 .Search {
   display: flex;
+  flex-direction: column;
   min-height: 400px;
   height: 100vh;
   width: 100%;
-  justify-content: center;
-  align-items: center;
   background-image: url('../../assets/sf.jpg');
   background-position: center;
   background-size: cover;
   color: white;
+  position: relative;
+}
+
+.logo {
+  padding-top: 100px;
+  display: flex;
+  align-self: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  height: 200px;
+}
+
+.select-date {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.select-date input {
+  text-align: center;
+  height: 35px;
+  font-size: 20px;
+  background-color: transparent;
+  background-color: rgba(35, 35, 35, 0.8);
+  border: none;
+  color: white;
+  outline: none;
+}
+
+.cal_img {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  z-index: 10;
+  left: 10px;
+}
+
+.cal_img img {
+  width: 100%;
+}
+
+.location {
+  width: 300px;
+}
+
+.location input {
+  width: 100%;
+}
+
+.react-datepicker-ignore-onclickoutside {
+  text-align: center;
+  height: 35px;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.submit {
+  background-color: #FF5645;
+  color: white;
+  height: 37px;
+  font-size: 15px;
+  border: none;
+  border-radius: 0px;
+}
+
+#section04 {
+  position: absolute;
+  left: 48%;
+  bottom: 80px
+}
+
+#section04 a {
+  padding-top: 60px;
+}
+#section04 a span {
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: sdb04 2s infinite;
+  animation: sdb04 2s infinite;
+  box-sizing: border-box;
+}
+@-webkit-keyframes sdb04 {
+  0% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+  }
+  20% {
+    -webkit-transform: rotate(-45deg) translate(-10px, 10px);
+  }
+  40% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+  }
 }
 
 .filter-by {
@@ -21,3 +124,17 @@
   font-size:20px;
   font-family: 'Snell Roundhand, cursive';
 }
+
+@keyframes sdb04 {
+  0% {
+    transform: rotate(-45deg) translate(0, 0);
+  }
+  20% {
+    transform: rotate(-45deg) translate(-10px, 10px);
+  }
+  40% {
+    transform: rotate(-45deg) translate(0, 0);
+  }
+}
+
+

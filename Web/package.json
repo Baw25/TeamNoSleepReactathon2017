@@ -10,11 +10,14 @@
     "supertest-as-promised": "^4.0.0"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "classnames": "^2.2.5",
     "express": "^4.14.0",
     "lodash.map": "^4.6.0",
     "morgan": "^1.7.0",
+    "promise": "^7.1.1",
     "react": "^15.2.1",
+    "react-datepicker": "^0.41.1",
     "react-dom": "^15.2.1",
     "react-dropdown": "^1.2.1",
     "react-redux": "^5.0.3",
@@ -24,7 +27,12 @@
     "react-select-popover": "^0.1.1",
     "react-star-rating-component": "^1.2.4",
     "react-textselect": "^0.2.0",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "react-scroll": "^1.4.7",
+    "react-star-rating-component": "^1.2.4",
+    "redux": "^3.6.0",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "node server/index.js",

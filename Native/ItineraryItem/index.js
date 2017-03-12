@@ -7,28 +7,24 @@ import {
   Image,
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
-const padding = 10
+import ItineraryTitle from '../ItineraryTitle';
+
+const contentHeight = 200;
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
     backgroundColor: '#eeeeee',
-    padding: padding,
+    borderRadius: 4,
+    elevation: 4,
+    marginTop: 16,
+    marginLeft: 16,
+    marginRight: 16,
+    marginBottom: 16,
   },
-  body: {
-    marginTop: 10,
-  },
-  image: {
-    height: 200,
-  },
-  title: {
-    color : '#2a2f43',
-    flex : 1,
-  }
 });
 
 class ItineraryItem extends Component {
@@ -36,70 +32,66 @@ class ItineraryItem extends Component {
     super(props);
 
     this.state = {
-      expanded: true,
-      animation: new Animated.Value(),
+      expanded: false,
+      animation: new Animated.Value(0),
     };
 
-    this._boundToggle = this._toggle.bind(this);
-    this._boundExpanded = this._setExpandedHeight.bind(this);
+    this._boundToggle = this._toggleExpanded.bind(this);
   }
 
   render() {
     const {
       animation,
+      expanded,
     } = this.state;
 
     const {
+      desc,
       endTime,
-      title,
+      name,
       startTime,
-      url,
+      icon,
+      img,
     } = this.props;
 
-    return (
-      <TouchableWithoutFeedback onPress={this._boundToggle} >
-        <View style={styles.container}>
-            <Text style={styles.title}>
-              {title}
-            </Text>
+    const titleProps = {
+      desc,
+      icon,
+      startTime,
+      name,
+    };
 
-          <Animated.View style={{ height: animation }}>
-            <View
-              style={styles.body}
-              onLayout={this._boundExpanded}
-            >
-              <Image
-                source={{ uri: url }}
-                style={styles.image}
-              />
-            </View>
-          </Animated.View>
-        </View>
-      </TouchableWithoutFeedback>
+    return (
+      <View
+        style={[
+          styles.container,
+          { paddingBottom: expanded ? 16 : 0 }
+        ]}
+      >
+        <TouchableOpacity onPress={this._boundToggle}>
+          <ItineraryTitle {...titleProps} />
+        </TouchableOpacity>
+
+        <Animated.Image
+          style={{ height: animation }}
+          source={{ uri: img }}
+        />
+      </View>
     );
   }
 
-  _toggle() {
+  _toggleExpanded() {
     const {
       animation,
       expanded,
-      expandedHeight
     } = this.state;
-    const fromValue = expanded ? expandedHeight : 0.0;
-    const toValue = expanded ? 0.0 : expandedHeight;
+
+    const fromValue = expanded ? contentHeight : 0.0;
+    const toValue = expanded ? 0.0 : contentHeight;
 
     this.setState({ expanded : !expanded });
     animation.setValue(fromValue);
     Animated.timing(animation, { toValue: toValue, duration: 100 }).start();
-  }
-
-  _setExpandedHeight(event) {
-    if (this.state.expandedHeight !== undefined) {
-      return;
-    }
-
-    const height = event.nativeEvent.layout.height;
-    this.setState({ expandedHeight: height + padding });
   }
 }
 
