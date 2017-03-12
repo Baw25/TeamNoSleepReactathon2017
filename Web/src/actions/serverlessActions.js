@@ -15,6 +15,19 @@ const serverlessActions = {
       })
     }
   },
+  getItinerary: () => {
+    return function (dispatch) {
+    dispatch(requestTransactions())  
+      const type = types.MOCK_ITINERARY;
+      const instance = axios.get('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
+      .then(function(res) {
+        dispatch(receiveTransactions(res, type))
+      })
+      .catch(function(err) {
+        //TODO do awesome error handling
+      })
+    }
+  },
   provisionOpenTable: ({restaurantId, dateTime, partySize}) => {
     return {
       type: types.PROVISION_OPENTABLE,
@@ -38,14 +51,14 @@ const serverlessActions = {
         restaurantId, startDateTime, timeBetween: timeBetween || 30
       })
     }
-  }
+  },
 }
 
 // set data and loaded status
 function receiveTransactions(res, type) {
   return {
     type: type,
-    data: res.data.items,
+    data: res.data,
     loaded: true
   }
 }

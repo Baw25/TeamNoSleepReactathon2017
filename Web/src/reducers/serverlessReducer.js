@@ -2,12 +2,12 @@ function serverlessReducer(state = {}, payload) {
   switch(payload.type) {
     case 'FETCH_OPENTABLE_LIST':    
       return Object.assign({}, state, {
-        restaurants: payload.data
+        restaurants: payload.data.items
       });
-    case 'PROVISION_OPENTABLE':
-      return {
-        openTableList:['pro']
-      }
+    case 'MOCK_ITINERARY':
+       return Object.assign({}, state, {
+        itinerary: payload.data
+       });
     case 'RESERVE_OPENTABLE':
       return {
         openTableList:['res']
