@@ -32,6 +32,7 @@ class android extends Component {
     };
 
     this._boundItem = this._renderItem.bind(this);
+    this._boundSplash = this._renderSplash.bind(this);
   }
 
   componentDidMount() {
@@ -39,15 +40,19 @@ class android extends Component {
       .then(response => response.json())
       .then(itinerary => {
         Animated
-          .timing(this.state.fade, { toValue: 0.0, duration: 1000 })
-          .start();
+          .timing(this.state.fade, { toValue: 0.0, duration: 750 })
+          .start(payload => {
+            if (payload.finished) {
+              this.setState({ fadeFinished: true });
+            }
+          });
 
         this.setState({ itinerary });
       });
   }
 
   render() {
-    const { fade, itinerary: { user, pair, schedule } } = this.state;
+    const { user, pair, schedule } = this.state.itinerary;
     const startTime = schedule.length > 0 ? schedule[0].startTime : 0;
     const toolbarParam = { user, pair, startTime };
 
@@ -59,15 +64,26 @@ class android extends Component {
           <View style={{ height: 50 }} />
         </ScrollView>
         <DateNightFooter />
-        <Animated.View
-          style={[
-            styles.overlay,
-            { opacity: fade },
-          ]}
-        >
-          <Image source={require('./DateNightFooter/logo.png')} />
-        </Animated.View>
+        {this._boundSplash()}
       </View>
+    );
+  }
+
+  _renderSplash() {
+    const {
+      fade,
+      fadeFinished,
+    } = this.state;
+
+    return fadeFinished ? null : (
+      <Animated.View
+        style={[
+          styles.overlay,
+          { opacity: fade },
+        ]}
+      >
+        <Image source={require('./DateNightFooter/logo.png')} />
+      </Animated.View>
     );
   }
 
