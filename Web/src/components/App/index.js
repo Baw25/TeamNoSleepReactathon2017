@@ -1,7 +1,7 @@
 // src/components/App/index.js
 import React, { Component } from 'react';
 import classnames from 'classnames';
-
+import Homepage from '../Homepage';
 import logo from './logo.svg';
 import './style.css';
 
@@ -11,6 +11,9 @@ class App extends Component {
   state = {}
 
   render() {
+    const webpage = this.props.children ? React.cloneElement(this.props.children,
+        this.props) : <Homepage {... this.props} />;
+
     const { className, ...props } = this.props;
     return (
       <div className={classnames('App', className)} {...props}>
@@ -18,10 +21,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        {console.log(this.props)}
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+          { webpage }
       </div>
     );
   }
