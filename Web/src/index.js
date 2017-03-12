@@ -7,8 +7,6 @@ import reduxApp from './reduxApp';
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import App from './components/App';
-import About from './components/About';
-import NotFound from './components/NotFound';
 
 import Routes from './routes';
 import rootReducer from './reducers/rootReducer';

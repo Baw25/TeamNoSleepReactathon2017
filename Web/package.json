@@ -22,6 +22,7 @@
   },
   "scripts": {
     "start": "node server/index.js",
+    "start-dev": "react-scripts start",
     "start:server": "node server",
     "build": "./node_modules/react-scripts/bin/react-scripts.js build",
     "eject": "./node_modules/react-scripts/bin/react-scripts.js eject",

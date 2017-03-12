@@ -3,8 +3,6 @@ import React from 'react';
 import { Router, Route } from 'react-router'
 
 import App from './components/App';
-import About from './components/About';
-import NotFound from './components/NotFound';
 import reduxApp from './reduxApp.js';
 
 const routes = {
