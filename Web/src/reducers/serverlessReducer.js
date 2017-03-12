@@ -2,7 +2,7 @@ function serverlessReducer(state = {}, payload) {
   switch(payload.type) {
     case 'FETCH_OPENTABLE_LIST':    
       return Object.assign({}, state, {
-        restaurants: payload.data.items
+        restaurants: addDateNightFilters(payload.data.items)
       });
     case 'MOCK_ITINERARY':
        return Object.assign({}, state, {
@@ -20,5 +20,50 @@ function serverlessReducer(state = {}, payload) {
       return state
   }
 }
+
+const categories = [
+  'Italian',
+  'Korean', 
+  'American',
+  'Californian',
+  'Japanese',
+  'Chinese',
+  'Spanish Tapas',
+  'French',
+  'Mexican',
+  'Mediterranean',
+  'Seafood',
+  'Peruvian',
+  'Moroccan'
+];
+
+const dollars = [
+  '$',
+  '$$',
+  '$$$',
+  '$$$$',
+  '$$$$$'
+];
+
+const vibes = [
+  'trendy',
+  'chill',
+  'sporty',
+  'cocktails',
+  'close',
+  'romantic'
+];
+
+// function addDateNightFilters(data) {
+//   data.map((restaurant) => {
+//     restaurant.category: categories[Math.floor(Math.random()*categories.length)];
+//     restaurant.dollar: dollars[Math.floor(Math.random()*dollars.length)];
+//     restaurant.vibe: vibes[Math.floor(Math.random()*vibes.length)];
+//   })
+
+//   return data;
+// }
+
+
 
 export default serverlessReducer;

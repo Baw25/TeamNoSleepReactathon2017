@@ -19,7 +19,7 @@ const serverlessActions = {
     return function (dispatch) {
     dispatch(requestTransactions())  
       const type = types.MOCK_ITINERARY;
-      const instance = axios.get('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/itinerary')
+      const instance = axios.get('https://x0u64jkdmd.execute-api.us-east-1.amazonaws.com/dev/ritinerary')
       .then(function(res) {
         dispatch(receiveTransactions(res, type))
       })

@@ -5,7 +5,7 @@ import './searchbar.css';
 const names = [
   'Italian',
   'Korean', 
-  'Contemporary American',
+  'American',
   'Californian',
   'Japanese',
   'Chinese',
