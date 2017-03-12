@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   description: {
     color: '#ffffff',
     fontSize: 12,
+    marginTop: 6,
   },
   descriptionContainer: {
     alignItems: 'center',

@@ -32,7 +32,23 @@
       "icon" : "tickets",
       "img" : "http://digitalspyuk.cdnds.net/16/45/768x512/gallery-1478513336-belle-and-her-father-beauty-and-the-beast.jpg",
       "startTime" : 1489378200,
+      "endTime" : 1489386000
+    },
+    {
+      "name" : "Walk",
+      "desc" : "691 Market St",
+      "icon" : "walking",
+      "img" : "https://maps.googleapis.com/maps/api/staticmap?center=Local+Edition+-+San+Francisco&markers=size:mid%7Ccolor:red%7CLocal+Edition+-+San+Francisco&zoom=14&size=360x360&scale=2&key=AIzaSyA16GJLXGGP7Asjy8n1TiyDD4jLsIP3XN4",
+      "startTime" : 1489386000,
       "endTime" : 1489386600
+    },
+    {
+      "name" : "Adventure",
+      "desc" : "Mystery Bar",
+      "icon" : "cocktails",
+      "img" : "http://www.bacardi.com/us/SiteImages/featured-cocktails/fc-kc-step0-bg.jpg",
+      "startTime" : 1489386600,
+      "endTime" : 1489395600
     }
   ]
 }
